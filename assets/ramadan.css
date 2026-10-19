@@ -1,102 +1,171 @@
 /* Ramadan mode - only loaded when the Ramadan theme setting is on. */
 
-/* Header: deep green with a gold ornamental edge */
-.ramadan-mode .header-wrapper,
+/* Announcement bar: dark with gold crescents */
 .ramadan-mode .utility-bar {
   --color-background: var(--ramadan-primary);
   --gradient-background: rgb(var(--ramadan-primary));
-  --color-foreground: 255, 255, 255;
-  --color-link: 255, 255, 255;
   background: rgb(var(--ramadan-primary));
-  color: rgb(255, 255, 255);
 }
 
-.ramadan-mode .header-wrapper {
-  position: relative;
-  border-bottom: 3px solid rgb(var(--ramadan-accent));
-}
-
-.ramadan-mode .header-wrapper::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  bottom: -11px;
-  height: 8px;
-  pointer-events: none;
-  background: radial-gradient(circle at 8px 0, rgb(var(--ramadan-accent)) 4px, transparent 4.5px) 0 0 / 16px 8px repeat-x;
-}
-
-.ramadan-mode .header__heading-link,
-.ramadan-mode .header__icon,
-.ramadan-mode .header__menu-item,
-.ramadan-mode .utility-bar a,
 .ramadan-mode .utility-bar .announcement-bar__message {
-  color: rgb(255, 255, 255);
-}
-
-.ramadan-mode .announcement-bar__message {
-  letter-spacing: 0.08rem;
+  color: rgb(var(--ramadan-accent));
 }
 
 .ramadan-mode .announcement-bar__message::before,
 .ramadan-mode .announcement-bar__message::after {
   content: '\263E';
   margin-inline: 0.8rem;
+}
+
+/* Header: keeps the transparent overlay on the homepage; gold hairline elsewhere */
+.ramadan-mode body:not(.template-index) .header-wrapper {
+  border-bottom: 1px solid rgba(var(--ramadan-accent), 0.7);
+}
+
+.ramadan-mode .header__menu-item:hover,
+.ramadan-mode .header__menu-item:hover span,
+.ramadan-mode .header__active-menu-item {
   color: rgb(var(--ramadan-accent));
 }
 
-/* Banner */
-.ramadan-banner {
+/* Hero: replaces the normal homepage slideshow while Ramadan mode is on */
+.ramadan-mode .template-index [id$='__hero'] {
+  display: none;
+}
+
+.ramadan-hero {
   position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(52rem, 82vh, 84rem);
   overflow: hidden;
-  background: rgb(var(--ramadan-primary));
+  isolation: isolate;
   color: #fff;
   text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(var(--ramadan-accent), 0.28), transparent 55%),
+    radial-gradient(circle at 15% 80%, rgba(var(--ramadan-accent), 0.12), transparent 40%),
+    linear-gradient(165deg, rgb(var(--ramadan-primary)), #05070d 80%);
 }
 
-.ramadan-banner__media {
+.ramadan-hero__media {
   position: absolute;
   inset: 0;
+  z-index: -2;
 }
 
-.ramadan-banner__media img {
+.ramadan-hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35;
 }
 
-.ramadan-banner__inner {
-  position: relative;
-  padding-block: 3.2rem;
+/* Readability overlay: darker at the top (under the header) and the bottom */
+.ramadan-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.25) 45%, rgba(0, 0, 0, 0.6));
 }
 
-.ramadan-banner__eyebrow {
-  margin: 0 0 0.8rem;
+/* Thin gold frame */
+.ramadan-hero::after {
+  content: '';
+  position: absolute;
+  inset: 2.4rem;
+  z-index: -1;
+  border: 1px solid rgba(var(--ramadan-accent), 0.55);
+  pointer-events: none;
+}
+
+.ramadan-hero__inner {
+  max-width: 78rem;
+  padding: 14rem 2.4rem 8rem;
+}
+
+.ramadan-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 0 0 2rem;
   color: rgb(var(--ramadan-accent));
-  font-size: 2.4rem;
-  line-height: 1;
+  font-size: 1.3rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
 }
 
-.ramadan-banner__heading {
+.ramadan-hero__eyebrow::before,
+.ramadan-hero__eyebrow::after {
+  content: '';
+  width: 5rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.ramadan-hero__crescent {
+  font-size: 3.2rem;
+  line-height: 1;
+  color: rgb(var(--ramadan-accent));
+  margin: 0 0 1rem;
+}
+
+.ramadan-hero__heading {
   margin: 0;
   color: #fff;
+  font-size: clamp(3.4rem, 2rem + 4.6vw, 7.2rem);
+  line-height: 1.08;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.ramadan-banner__text {
-  max-width: 52rem;
-  margin: 1rem auto 0;
-  color: rgba(255, 255, 255, 0.9);
+.ramadan-hero__text {
+  max-width: 56rem;
+  margin: 2rem auto 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.5rem, 1.3rem + 0.5vw, 1.9rem);
 }
 
-.ramadan-banner__button {
-  margin-top: 2rem;
+.ramadan-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 3.2rem;
+}
+
+.ramadan-hero__button {
   --color-button: var(--ramadan-accent);
   --color-button-text: var(--ramadan-primary);
+  min-width: 20rem;
 }
 
-@media screen and (min-width: 750px) {
-  .ramadan-banner__inner {
-    padding-block: 4.8rem;
+.ramadan-hero__button--secondary {
+  --color-button: 0, 0, 0;
+  --color-button-text: 255, 255, 255;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.ramadan-hero__button--secondary::after {
+  box-shadow: none;
+}
+
+@media screen and (max-width: 749px) {
+  .ramadan-hero {
+    min-height: 60rem;
+  }
+
+  .ramadan-hero::after {
+    inset: 1.2rem;
+  }
+
+  .ramadan-hero__inner {
+    padding: 12rem 2rem 6rem;
+  }
+
+  .ramadan-hero__eyebrow::before,
+  .ramadan-hero__eyebrow::after {
+    width: 2.4rem;
   }
 }

@@ -1,8 +1,13 @@
 {%- comment -%}
-  Sitewide Ramadan banner. Controlled from Theme settings > Ramadan mode; renders nothing when off.
+  Ramadan hero. Visibility and content come from Theme settings > Ramadan mode.
+  Renders nothing when Ramadan mode is off. While on, it replaces the normal homepage hero.
 {%- endcomment -%}
 {%- if settings.ramadan_enabled -%}
   {%- liquid
+    assign eyebrow = settings.ramadan_banner_eyebrow
+    if eyebrow == blank
+      assign eyebrow = 'ramadan.banner.eyebrow' | t
+    endif
     assign banner_heading = settings.ramadan_banner_heading
     if banner_heading == blank
       assign banner_heading = 'ramadan.banner.heading' | t
@@ -16,29 +21,43 @@
       assign banner_button = 'ramadan.banner.button' | t
     endif
     assign banner_link = settings.ramadan_banner_link | default: collections['gift-sets'].url | default: routes.all_products_collection_url
+    assign gifting_link = pages['ramadan-gifting'].url
   -%}
-  <section class="ramadan-banner" aria-label="{{ banner_heading | escape }}">
+  <section class="ramadan-hero" aria-label="{{ banner_heading | escape }}">
     {%- if settings.ramadan_banner_image != blank -%}
-      <div class="ramadan-banner__media">
-        {{ settings.ramadan_banner_image | image_url: width: 1800 | image_tag: loading: 'lazy', alt: '' }}
+      <div class="ramadan-hero__media">
+        {{ settings.ramadan_banner_image | image_url: width: 2400 | image_tag: loading: 'eager', alt: '', widths: '800, 1200, 1800, 2400', sizes: '100vw' }}
       </div>
     {%- endif -%}
-    <div class="ramadan-banner__inner page-width">
-      <p class="ramadan-banner__eyebrow" aria-hidden="true">&#9790;</p>
-      <h2 class="ramadan-banner__heading h1">{{ banner_heading | escape }}</h2>
-      <p class="ramadan-banner__text">{{ banner_text | escape }}</p>
-      <a href="{{ banner_link }}" class="ramadan-banner__button button">{{ banner_button | escape }}</a>
+    <div class="ramadan-hero__inner">
+      <p class="ramadan-hero__crescent" aria-hidden="true">&#9790;</p>
+      <p class="ramadan-hero__eyebrow">{{ eyebrow | escape }}</p>
+      <h1 class="ramadan-hero__heading">{{ banner_heading | escape }}</h1>
+      <p class="ramadan-hero__text">{{ banner_text | escape }}</p>
+      <div class="ramadan-hero__actions">
+        <a href="{{ banner_link }}" class="ramadan-hero__button button">{{ banner_button | escape }}</a>
+        {%- if gifting_link != blank -%}
+          <a href="{{ gifting_link }}" class="ramadan-hero__button ramadan-hero__button--secondary button">
+            {{- 'ramadan.banner.secondary_button' | t -}}
+          </a>
+        {%- endif -%}
+      </div>
     </div>
   </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "Ramadan banner",
+  "name": "Ramadan hero",
   "settings": [
     {
       "type": "paragraph",
       "content": "Content and visibility are managed in Theme settings > Ramadan mode."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ramadan hero"
     }
   ]
 }

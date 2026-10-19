@@ -24,8 +24,8 @@
       {
         "type": "color",
         "id": "ramadan_primary",
-        "label": "Primary (header, announcement bar, buttons)",
-        "default": "#0B3B35"
+        "label": "Primary (announcement bar, buttons)",
+        "default": "#0E1526"
       },
       {
         "type": "color",
@@ -62,7 +62,13 @@
       },
       {
         "type": "header",
-        "content": "Banner"
+        "content": "Hero banner"
+      },
+      {
+        "type": "text",
+        "id": "ramadan_banner_eyebrow",
+        "label": "Hero eyebrow",
+        "info": "Leave blank to use the built-in English/Arabic text."
       },
       {
         "type": "text",
@@ -90,7 +96,8 @@
       {
         "type": "image_picker",
         "id": "ramadan_banner_image",
-        "label": "Background image (optional)"
+        "label": "Hero background image",
+        "info": "Recommended 2400 x 1200 px. Without an image a dark gold-glow background is used."
       },
       {
         "type": "header",

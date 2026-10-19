@@ -67,21 +67,20 @@ h2.title {
   font-size: 1.1rem;
 }
 
-/* Homepage: transparent header floating over the hero banner.
-   Skipped in Ramadan mode, where the banner sits directly under a solid header. */
-html:not(.ramadan-mode) .template-index .section-header {
+/* Homepage: transparent header floating over the hero (the normal slideshow or the Ramadan hero) */
+.template-index .section-header {
   position: absolute;
   inset-inline: 0;
   width: 100%;
   z-index: 5;
 }
 
-html:not(.ramadan-mode) .template-index .header-wrapper {
+.template-index .header-wrapper {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
   border-bottom: 0;
 }
 
-html:not(.ramadan-mode) .template-index .header-wrapper--border-bottom {
+.template-index .header-wrapper--border-bottom {
   border-bottom: 0;
 }
 

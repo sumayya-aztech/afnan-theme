@@ -1,5 +1,9 @@
 {
   "sections": {
+    "ramadan_hero": {
+      "type": "ramadan-banner",
+      "settings": {}
+    },
     "hero": {
       "type": "slideshow",
       "blocks": {
@@ -271,6 +275,7 @@
     }
   },
   "order": [
+    "ramadan_hero",
     "hero",
     "best_sellers",
     "shop_by_collection",

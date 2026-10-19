@@ -531,9 +531,11 @@
   "ramadan": {
     "announcement": "Ramadan Kareem - gift your loved ones with Afnan",
     "banner": {
-      "heading": "Ramadan Gifting",
-      "text": "Thoughtfully curated perfume gifts for every budget.",
-      "button": "Shop gifts"
+      "eyebrow": "Ramadan Kareem",
+      "heading": "Gift the scent of Ramadan",
+      "text": "Luxury perfume gift sets for the people who make your Ramadan and Eid brighter.",
+      "button": "Shop Ramadan gifts",
+      "secondary_button": "Build your gift"
     }
   }
 }
