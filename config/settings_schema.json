@@ -137,6 +137,43 @@
     ]
   },
   {
+    "name": "Loyalty programme",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Tier thresholds are lifetime points. The landing page and the My Loyalty widget both read them."
+      },
+      {
+        "type": "range",
+        "id": "loyalty_gold_points",
+        "label": "Gold tier starts at (points)",
+        "min": 500,
+        "max": 5000,
+        "step": 100,
+        "default": 1000
+      },
+      {
+        "type": "range",
+        "id": "loyalty_platinum_points",
+        "label": "Platinum tier starts at (points)",
+        "min": 1000,
+        "max": 9500,
+        "step": 500,
+        "default": 3000
+      },
+      {
+        "type": "range",
+        "id": "loyalty_demo_points",
+        "label": "Demo points balance",
+        "min": 0,
+        "max": 5000,
+        "step": 50,
+        "default": 1250,
+        "info": "Shown in the My Loyalty widget when the customer has no custom.loyalty_points metafield yet."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

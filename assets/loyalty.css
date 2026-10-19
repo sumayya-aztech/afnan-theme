@@ -1,0 +1,384 @@
+/* Loyalty programme: landing page and account widget. Logical properties keep it RTL-safe. */
+
+.loyalty-hero {
+  padding-block: 8rem 6rem;
+  text-align: center;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(201, 162, 75, 0.3), transparent 60%),
+    linear-gradient(160deg, #0e1526, #05070d);
+}
+
+.loyalty-hero__eyebrow {
+  margin: 0 0 1.4rem;
+  color: rgb(201, 162, 75);
+  font-size: 1.3rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+.loyalty-hero__heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(3rem, 2rem + 3.6vw, 5.6rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loyalty-hero__text {
+  max-width: 56rem;
+  margin: 1.8rem auto 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.7rem;
+}
+
+.loyalty-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.loyalty-hero .button {
+  --color-button: 201, 162, 75;
+  --color-button-text: 14, 21, 38;
+  min-width: 20rem;
+}
+
+.loyalty-hero .loyalty-hero__secondary {
+  --color-button: 0, 0, 0;
+  --color-button-text: 255, 255, 255;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+}
+
+.loyalty-section {
+  padding-block: 5.6rem;
+}
+
+.loyalty-section--tint {
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.loyalty-section .title {
+  margin-bottom: 3.2rem;
+}
+
+.loyalty-intro {
+  max-width: 60rem;
+  margin: -1.6rem auto 3rem;
+  text-align: center;
+}
+
+/* Steps */
+.loyalty-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.loyalty-step {
+  padding: 2.8rem 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  text-align: center;
+}
+
+.loyalty-step__number {
+  display: inline-grid;
+  place-items: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-bottom: 1.4rem;
+  border-radius: 50%;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.8rem;
+}
+
+.loyalty-step__title {
+  margin: 0 0 0.8rem;
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loyalty-step__text {
+  margin: 0;
+}
+
+/* Tier table */
+.loyalty-table-wrap {
+  overflow-x: auto;
+}
+
+.loyalty-table {
+  width: 100%;
+  min-width: 56rem;
+  border-collapse: collapse;
+  background: rgb(var(--color-background));
+  text-align: center;
+}
+
+.loyalty-table th,
+.loyalty-table td {
+  padding: 1.4rem 1.6rem;
+  border: 1px solid rgba(var(--color-foreground), 0.14);
+}
+
+.loyalty-table thead th {
+  font-size: 1.3rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.loyalty-table tbody th {
+  text-align: start;
+  font-weight: 600;
+}
+
+.loyalty-table__tier--silver {
+  background: #e6e8ec;
+  color: #1c1c1c;
+}
+
+.loyalty-table__tier--gold {
+  background: #f3dfa8;
+  color: #1c1c1c;
+}
+
+.loyalty-table__tier--platinum {
+  background: #1c2233;
+  color: #fff;
+}
+
+/* Ways to earn */
+.loyalty-earn {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.loyalty-earn__item {
+  padding: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  text-align: center;
+}
+
+.loyalty-earn__reward {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: #b0852a;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.loyalty-earn__title {
+  margin: 0 0 0.6rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.loyalty-earn__text {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.loyalty-redeem {
+  margin: 2.8rem 0 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.loyalty-cta {
+  padding-block: 6rem;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(160deg, #0e1526, #05070d);
+}
+
+.loyalty-cta__heading {
+  margin: 0 0 1rem;
+  color: #fff;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loyalty-cta__text {
+  margin: 0 0 2.4rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.loyalty-cta .button {
+  --color-button: 201, 162, 75;
+  --color-button-text: 14, 21, 38;
+  min-width: 22rem;
+}
+
+/* Account widget */
+.loyalty-account {
+  max-width: 80rem;
+  padding-block: 4rem 6rem;
+}
+
+.loyalty-account__title {
+  margin: 0 0 2.4rem;
+  font-size: clamp(2.2rem, 1.8rem + 1vw, 3rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.loyalty-account__signin {
+  padding: 4rem 2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  text-align: center;
+}
+
+.loyalty-card {
+  padding: 2.8rem;
+  border-radius: 0.8rem;
+  color: #1c1c1c;
+}
+
+.loyalty-card--silver {
+  background: linear-gradient(135deg, #f1f2f5, #cfd3db);
+}
+
+.loyalty-card--gold {
+  background: linear-gradient(135deg, #f8e7b6, #dcb55a);
+}
+
+.loyalty-card--platinum {
+  background: linear-gradient(135deg, #2b3350, #11162a);
+  color: #fff;
+}
+
+.loyalty-card__top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.loyalty-card__label {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.loyalty-card__points {
+  margin: 0;
+  font-size: clamp(3.6rem, 3rem + 2vw, 5.2rem);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.loyalty-card__points span {
+  font-size: 1.6rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.loyalty-card__tier {
+  text-align: end;
+}
+
+.loyalty-card__tier-name {
+  margin: 0;
+  font-size: 2.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.loyalty-progress {
+  margin-top: 2.8rem;
+}
+
+.loyalty-progress__bar {
+  height: 1.2rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.loyalty-card--platinum .loyalty-progress__bar {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.loyalty-progress__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #0e1526;
+  transition: width 0.6s ease;
+}
+
+.loyalty-card--platinum .loyalty-progress__fill {
+  background: #c9a24b;
+}
+
+.loyalty-progress__text {
+  margin: 1rem 0 0;
+  font-weight: 600;
+}
+
+.loyalty-progress__scale {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem 0 0;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.loyalty-account__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2.4rem;
+}
+
+.loyalty-account__box {
+  padding: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.loyalty-account__box h2 {
+  margin: 0 0 0.8rem;
+  font-size: 1.4rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.loyalty-account__demo {
+  margin: 2rem 0 0;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+@media screen and (max-width: 749px) {
+  .loyalty-hero {
+    padding-block: 6rem 4rem;
+  }
+
+  .loyalty-steps,
+  .loyalty-account__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loyalty-card {
+    padding: 2rem;
+  }
+
+  .loyalty-card__tier {
+    text-align: start;
+  }
+}

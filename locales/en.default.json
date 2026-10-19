@@ -621,5 +621,87 @@
     "oos_title": "Your free gift is out of stock",
     "oos_text": "You've unlocked a free gift, but it is out of stock right now. Your order is not affected.",
     "product_text": "Add this to your cart and {{ gift }} is added free, automatically."
+  },
+  "loyalty": {
+    "hero": {
+      "eyebrow": "Afnan Rewards",
+      "heading": "Earn points. Unlock rewards.",
+      "text": "Join Afnan Rewards for free. Earn points on every order, climb from Silver to Platinum and redeem points at checkout.",
+      "learn": "See how it works"
+    },
+    "steps": {
+      "heading": "How it works",
+      "s1_title": "Sign up",
+      "s1_text": "Create your free account and receive 100 welcome points straight away.",
+      "s2_title": "Earn points",
+      "s2_text": "Collect points when you shop, review products, celebrate your birthday and refer friends.",
+      "s3_title": "Redeem",
+      "s3_text": "Turn points into a discount code and apply it at checkout. 100 points = AED 10."
+    },
+    "tiers": {
+      "heading": "Choose your tier",
+      "intro": "Your tier is based on the points you have earned. Higher tiers earn faster and unlock more perks.",
+      "benefit": "Benefit",
+      "silver": "Silver",
+      "gold": "Gold",
+      "platinum": "Platinum",
+      "row_points": "Points needed",
+      "row_multiplier": "Points per AED 1",
+      "row_delivery": "Free delivery",
+      "delivery_silver": "Over AED 100",
+      "delivery_gold": "Over AED 50",
+      "delivery_platinum": "Always",
+      "row_birthday": "Birthday reward",
+      "birthday_silver": "100 points",
+      "birthday_gold": "200 points",
+      "birthday_platinum": "Gift + 300 points",
+      "row_early": "Early access to launches",
+      "row_gifts": "Exclusive gifts",
+      "yes": "Yes",
+      "no": "-"
+    },
+    "earn": {
+      "heading": "Ways to earn",
+      "signup_title": "Join",
+      "signup_reward": "+100 points",
+      "signup_text": "A welcome bonus when you create your account.",
+      "purchase_title": "Shop",
+      "purchase_reward": "1 point per AED 1",
+      "purchase_text": "Earn on every order. Gold and Platinum earn more.",
+      "review_title": "Review",
+      "review_reward": "+50 points",
+      "review_text": "Review a product you bought. Add a photo for +100.",
+      "birthday_title": "Birthday",
+      "birthday_reward": "+100 to +300 points",
+      "birthday_text": "A gift from us each year, based on your tier.",
+      "referral_title": "Refer a friend",
+      "referral_reward": "+300 points",
+      "referral_text": "When your friend places their first order.",
+      "redeem": "Redeem 100 points for AED 10 off at checkout. Minimum 200 points."
+    },
+    "cta": {
+      "heading": "Ready to start earning?",
+      "text": "It takes a minute to join, and your first points are on us.",
+      "button": "Join Afnan Rewards",
+      "view_account": "View my rewards"
+    },
+    "account": {
+      "hello": "Hello, {{ name }}",
+      "balance": "Points balance",
+      "points_unit": "points",
+      "tier": "Your tier",
+      "progress_title": "Progress to the next tier",
+      "to_next": "{{ points }} more points to reach {{ tier }}",
+      "top_tier": "You are at our highest tier. Enjoy every perk.",
+      "redeem_title": "Redeem at checkout",
+      "redeem_text": "Turn 100 points into AED 10 off. Your discount code appears here and is applied at checkout.",
+      "earn_title": "Earn more",
+      "earn_text": "Shop, review, celebrate your birthday and refer friends to earn more points.",
+      "how_it_works": "See how it works",
+      "signin_title": "Sign in to see your rewards",
+      "signin_text": "Log in to view your points balance and tier.",
+      "signin_button": "Sign in",
+      "demo_note": "Demo balance shown. Your real balance appears here once your rewards account is connected."
+    }
   }
 }

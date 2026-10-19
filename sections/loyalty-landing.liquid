@@ -1,0 +1,176 @@
+{%- comment -%}
+  Loyalty programme landing page: hero, "How it works" in 3 steps, tier comparison table,
+  ways to earn and a sign-up button. All copy is in locales (loyalty.*) so it works in English and Arabic.
+  Tier thresholds come from Theme settings > Loyalty programme.
+{%- endcomment -%}
+{{ 'loyalty.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign gold_points = settings.loyalty_gold_points | default: 1000
+  assign platinum_points = settings.loyalty_platinum_points | default: 3000
+  assign signup_link = section.settings.signup_link
+  if signup_link == blank
+    assign signup_link = routes.account_login_url
+  endif
+  assign account_link = section.settings.account_link
+  if account_link == blank
+    assign account_link = pages['my-loyalty'].url
+  endif
+-%}
+
+<div class="loyalty" {{ section.shopify_attributes }}>
+  <section class="loyalty-hero">
+    <div class="page-width loyalty-hero__inner">
+      <p class="loyalty-hero__eyebrow">{{ 'loyalty.hero.eyebrow' | t }}</p>
+      <h1 class="loyalty-hero__heading">{{ 'loyalty.hero.heading' | t }}</h1>
+      <p class="loyalty-hero__text">{{ 'loyalty.hero.text' | t }}</p>
+      <div class="loyalty-hero__actions">
+        {%- if customer -%}
+          {%- if account_link != blank -%}
+            <a href="{{ account_link }}" class="button">{{ 'loyalty.cta.view_account' | t }}</a>
+          {%- endif -%}
+        {%- else -%}
+          <a href="{{ signup_link }}" class="button">{{ 'loyalty.cta.button' | t }}</a>
+        {%- endif -%}
+        <a href="#loyalty-tiers" class="button button--secondary loyalty-hero__secondary">{{ 'loyalty.hero.learn' | t }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="loyalty-section" id="how-it-works">
+    <div class="page-width">
+      <h2 class="title">{{ 'loyalty.steps.heading' | t }}</h2>
+      <ol class="loyalty-steps" role="list">
+        {%- for index in (1..3) -%}
+          {%- capture title_key %}loyalty.steps.s{{ index }}_title{% endcapture -%}
+          {%- capture text_key %}loyalty.steps.s{{ index }}_text{% endcapture -%}
+          <li class="loyalty-step">
+            <span class="loyalty-step__number" aria-hidden="true">{{ index }}</span>
+            <h3 class="loyalty-step__title">{{ title_key | t }}</h3>
+            <p class="loyalty-step__text">{{ text_key | t }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+
+  <section class="loyalty-section loyalty-section--tint" id="loyalty-tiers">
+    <div class="page-width">
+      <h2 class="title">{{ 'loyalty.tiers.heading' | t }}</h2>
+      <p class="loyalty-intro">{{ 'loyalty.tiers.intro' | t }}</p>
+
+      <div class="loyalty-table-wrap">
+        <table class="loyalty-table">
+          <caption class="visually-hidden">{{ 'loyalty.tiers.heading' | t }}</caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'loyalty.tiers.benefit' | t }}</th>
+              <th scope="col" class="loyalty-table__tier loyalty-table__tier--silver">{{ 'loyalty.tiers.silver' | t }}</th>
+              <th scope="col" class="loyalty-table__tier loyalty-table__tier--gold">{{ 'loyalty.tiers.gold' | t }}</th>
+              <th scope="col" class="loyalty-table__tier loyalty-table__tier--platinum">{{ 'loyalty.tiers.platinum' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_points' | t }}</th>
+              <td>0</td>
+              <td>{{ gold_points }}</td>
+              <td>{{ platinum_points }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_multiplier' | t }}</th>
+              <td>1x</td>
+              <td>1.25x</td>
+              <td>1.5x</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_delivery' | t }}</th>
+              <td>{{ 'loyalty.tiers.delivery_silver' | t }}</td>
+              <td>{{ 'loyalty.tiers.delivery_gold' | t }}</td>
+              <td>{{ 'loyalty.tiers.delivery_platinum' | t }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_birthday' | t }}</th>
+              <td>{{ 'loyalty.tiers.birthday_silver' | t }}</td>
+              <td>{{ 'loyalty.tiers.birthday_gold' | t }}</td>
+              <td>{{ 'loyalty.tiers.birthday_platinum' | t }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_early' | t }}</th>
+              <td>{{ 'loyalty.tiers.no' | t }}</td>
+              <td>{{ 'loyalty.tiers.yes' | t }}</td>
+              <td>{{ 'loyalty.tiers.yes' | t }}</td>
+            </tr>
+            <tr>
+              <th scope="row">{{ 'loyalty.tiers.row_gifts' | t }}</th>
+              <td>{{ 'loyalty.tiers.no' | t }}</td>
+              <td>{{ 'loyalty.tiers.no' | t }}</td>
+              <td>{{ 'loyalty.tiers.yes' | t }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="loyalty-section" id="ways-to-earn">
+    <div class="page-width">
+      <h2 class="title">{{ 'loyalty.earn.heading' | t }}</h2>
+      <ul class="loyalty-earn" role="list">
+        {%- assign earn_keys = 'signup,purchase,review,birthday,referral' | split: ',' -%}
+        {%- for key in earn_keys -%}
+          {%- capture title_key %}loyalty.earn.{{ key }}_title{% endcapture -%}
+          {%- capture reward_key %}loyalty.earn.{{ key }}_reward{% endcapture -%}
+          {%- capture text_key %}loyalty.earn.{{ key }}_text{% endcapture -%}
+          <li class="loyalty-earn__item">
+            <span class="loyalty-earn__reward">{{ reward_key | t }}</span>
+            <h3 class="loyalty-earn__title">{{ title_key | t }}</h3>
+            <p class="loyalty-earn__text">{{ text_key | t }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <p class="loyalty-redeem">{{ 'loyalty.earn.redeem' | t }}</p>
+    </div>
+  </section>
+
+  <section class="loyalty-cta">
+    <div class="page-width">
+      <h2 class="loyalty-cta__heading">{{ 'loyalty.cta.heading' | t }}</h2>
+      <p class="loyalty-cta__text">{{ 'loyalty.cta.text' | t }}</p>
+      {%- if customer -%}
+        {%- if account_link != blank -%}
+          <a href="{{ account_link }}" class="button">{{ 'loyalty.cta.view_account' | t }}</a>
+        {%- endif -%}
+      {%- else -%}
+        <a href="{{ signup_link }}" class="button">{{ 'loyalty.cta.button' | t }}</a>
+      {%- endif -%}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Loyalty landing",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "signup_link",
+      "label": "Sign-up button link",
+      "info": "Defaults to the customer login/sign-up page."
+    },
+    {
+      "type": "url",
+      "id": "account_link",
+      "label": "Link to the My Loyalty page",
+      "info": "Shown to logged-in customers. Defaults to the page with handle my-loyalty."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty landing"
+    }
+  ]
+}
+{% endschema %}

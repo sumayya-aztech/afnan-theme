@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "loyalty-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

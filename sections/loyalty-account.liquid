@@ -1,0 +1,143 @@
+{%- comment -%}
+  Customer loyalty widget: points balance, tier and a progress bar to the next tier.
+
+  Shopify's new customer accounts do not render theme account templates, so this lives on a normal
+  store page (handle: my-loyalty) and reads the logged-in `customer` object.
+
+  Points come from the customer metafield custom.loyalty_points (integer, storefront access on).
+  When it is empty, the dummy value from Theme settings > Loyalty programme is shown, so the widget
+  can be demonstrated before the loyalty app is connected. In production the loyalty app owns this number.
+{%- endcomment -%}
+{{ 'loyalty.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign gold_points = settings.loyalty_gold_points | default: 1000
+  assign platinum_points = settings.loyalty_platinum_points | default: 3000
+
+  assign points = customer.metafields.custom.loyalty_points.value
+  assign is_demo = false
+  if points == blank
+    assign points = settings.loyalty_demo_points | default: 1250
+    assign is_demo = true
+  endif
+  assign points = points | plus: 0
+
+  if points >= platinum_points
+    assign tier = 'platinum'
+    assign tier_floor = platinum_points
+    assign tier_ceiling = 0
+  elsif points >= gold_points
+    assign tier = 'gold'
+    assign tier_floor = gold_points
+    assign tier_ceiling = platinum_points
+  else
+    assign tier = 'silver'
+    assign tier_floor = 0
+    assign tier_ceiling = gold_points
+  endif
+
+  assign progress = 100
+  assign points_to_next = 0
+  assign next_tier = ''
+  if tier_ceiling > 0
+    assign range = tier_ceiling | minus: tier_floor
+    assign progress = points | minus: tier_floor | times: 100 | divided_by: range
+    assign points_to_next = tier_ceiling | minus: points
+    if tier == 'silver'
+      assign next_tier = 'loyalty.tiers.gold' | t
+    else
+      assign next_tier = 'loyalty.tiers.platinum' | t
+    endif
+  endif
+  assign tier_key = 'loyalty.tiers.' | append: tier
+-%}
+
+<div class="loyalty-account page-width" {{ section.shopify_attributes }}>
+  {%- if customer == blank -%}
+    <div class="loyalty-account__signin">
+      <h1 class="loyalty-account__title">{{ 'loyalty.account.signin_title' | t }}</h1>
+      <p>{{ 'loyalty.account.signin_text' | t }}</p>
+      <a href="{{ routes.account_login_url }}" class="button">{{ 'loyalty.account.signin_button' | t }}</a>
+    </div>
+  {%- else -%}
+    <h1 class="loyalty-account__title">
+      {%- assign display_name = customer.first_name -%}
+      {%- if display_name == blank -%}
+        {%- assign display_name = customer.email -%}
+      {%- endif -%}
+      {{ 'loyalty.account.hello' | t: name: display_name }}
+    </h1>
+
+    <div class="loyalty-card loyalty-card--{{ tier }}">
+      <div class="loyalty-card__top">
+        <div>
+          <p class="loyalty-card__label">{{ 'loyalty.account.balance' | t }}</p>
+          <p class="loyalty-card__points">{{ points }} <span>{{ 'loyalty.account.points_unit' | t }}</span></p>
+        </div>
+        <div class="loyalty-card__tier">
+          <p class="loyalty-card__label">{{ 'loyalty.account.tier' | t }}</p>
+          <p class="loyalty-card__tier-name">{{ tier_key | t }}</p>
+        </div>
+      </div>
+
+      <div class="loyalty-progress">
+        <div
+          class="loyalty-progress__bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="{{ progress }}"
+          aria-label="{{ 'loyalty.account.progress_title' | t }}"
+        >
+          <span class="loyalty-progress__fill" style="width: {{ progress }}%"></span>
+        </div>
+        <p class="loyalty-progress__text">
+          {%- if tier_ceiling > 0 -%}
+            {{ 'loyalty.account.to_next' | t: points: points_to_next, tier: next_tier }}
+          {%- else -%}
+            {{ 'loyalty.account.top_tier' | t }}
+          {%- endif -%}
+        </p>
+        <p class="loyalty-progress__scale" aria-hidden="true">
+          <span>{{ tier_floor }}</span>
+          {%- if tier_ceiling > 0 -%}<span>{{ tier_ceiling }}</span>{%- endif -%}
+        </p>
+      </div>
+    </div>
+
+    <div class="loyalty-account__grid">
+      <div class="loyalty-account__box">
+        <h2>{{ 'loyalty.account.redeem_title' | t }}</h2>
+        <p>{{ 'loyalty.account.redeem_text' | t }}</p>
+      </div>
+      <div class="loyalty-account__box">
+        <h2>{{ 'loyalty.account.earn_title' | t }}</h2>
+        <p>{{ 'loyalty.account.earn_text' | t }}</p>
+        <a href="{{ pages['loyalty'].url | default: '/pages/loyalty' }}" class="link">{{ 'loyalty.account.how_it_works' | t }}</a>
+      </div>
+    </div>
+
+    {%- if is_demo -%}
+      <p class="loyalty-account__demo">{{ 'loyalty.account.demo_note' | t }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Loyalty account",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Tier thresholds and the demo balance are set in Theme settings > Loyalty programme."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty account"
+    }
+  ]
+}
+{% endschema %}

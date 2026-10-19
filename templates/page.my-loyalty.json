@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "loyalty-account",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
