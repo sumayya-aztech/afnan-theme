@@ -80,7 +80,10 @@
               {%- for product in gift_products -%}
                 {%- liquid
                   assign in_range = false
-                  assign has_gift_tag = product.tags contains gift_tag
+                  assign has_gift_tag = false
+                  if product.tags contains gift_tag
+                    assign has_gift_tag = true
+                  endif
                   if filter_by_tag
                     unless has_gift_tag
                       continue
