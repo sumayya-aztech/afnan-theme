@@ -1,0 +1,132 @@
+{%- comment -%}
+  Gifting landing hero with a countdown to Eid.
+  Blank text settings fall back to the translated defaults (locales: gifting.hero.*), so the section works in English and Arabic.
+{%- endcomment -%}
+{{ 'gifting.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gifting-countdown.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign eyebrow = section.settings.eyebrow
+  if eyebrow == blank
+    assign eyebrow = 'gifting.hero.eyebrow' | t
+  endif
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'gifting.hero.heading' | t
+  endif
+  assign text = section.settings.text
+  if text == blank
+    assign text = 'gifting.hero.text' | t
+  endif
+  assign button_label = section.settings.button_label
+  if button_label == blank
+    assign button_label = 'gifting.hero.button' | t
+  endif
+  assign button_link = section.settings.button_link
+  if button_link == blank
+    assign button_link = '#gifts-by-budget'
+  endif
+  assign eid_date = section.settings.eid_date
+  if eid_date == blank
+    assign eid_date = settings.ramadan_eid_date
+  endif
+  if eid_date == blank
+    assign eid_date = '2027-03-09'
+  endif
+  assign eid_target = eid_date | append: 'T00:00:00+04:00'
+-%}
+
+<section class="gifting-hero" aria-label="{{ heading | escape }}" {{ section.shopify_attributes }}>
+  {%- if section.settings.image != blank -%}
+    <div class="gifting-hero__media">
+      {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'eager', alt: '', widths: '800, 1200, 1800, 2400', sizes: '100vw' }}
+    </div>
+  {%- endif -%}
+  <div class="gifting-hero__inner page-width">
+    <p class="gifting-hero__eyebrow">{{ eyebrow | escape }}</p>
+    <h1 class="gifting-hero__heading">{{ heading | escape }}</h1>
+    <p class="gifting-hero__text">{{ text | escape }}</p>
+
+    <eid-countdown
+      class="gifting-countdown"
+      data-target="{{ eid_target }}"
+      data-done="{{ 'gifting.hero.countdown_done' | t | escape }}"
+    >
+      <p class="gifting-countdown__label">{{ 'gifting.hero.countdown_label' | t }}</p>
+      <div class="gifting-countdown__grid" role="timer" aria-live="off">
+        <div class="gifting-countdown__unit">
+          <span class="gifting-countdown__value" data-unit="days">00</span>
+          <span class="gifting-countdown__name">{{ 'gifting.hero.days' | t }}</span>
+        </div>
+        <div class="gifting-countdown__unit">
+          <span class="gifting-countdown__value" data-unit="hours">00</span>
+          <span class="gifting-countdown__name">{{ 'gifting.hero.hours' | t }}</span>
+        </div>
+        <div class="gifting-countdown__unit">
+          <span class="gifting-countdown__value" data-unit="minutes">00</span>
+          <span class="gifting-countdown__name">{{ 'gifting.hero.minutes' | t }}</span>
+        </div>
+        <div class="gifting-countdown__unit">
+          <span class="gifting-countdown__value" data-unit="seconds">00</span>
+          <span class="gifting-countdown__name">{{ 'gifting.hero.seconds' | t }}</span>
+        </div>
+      </div>
+    </eid-countdown>
+
+    <a href="{{ button_link }}" class="gifting-hero__button button">{{ button_label | escape }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gifting hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Recommended 2400 x 1200 px. A dark gradient is used when empty."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "info": "Leave text fields blank to use the built-in English/Arabic text."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Defaults to the budget tabs below."
+    },
+    {
+      "type": "text",
+      "id": "eid_date",
+      "label": "Eid date (YYYY-MM-DD)",
+      "info": "Leave blank to use the date in Theme settings > Ramadan mode."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gifting hero"
+    }
+  ]
+}
+{% endschema %}

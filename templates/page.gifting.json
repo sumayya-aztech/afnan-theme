@@ -1,0 +1,89 @@
+{
+  "sections": {
+    "gifting_hero": {
+      "type": "gifting-hero",
+      "settings": {}
+    },
+    "budget_tabs": {
+      "type": "gifting-budget-tabs",
+      "blocks": {
+        "tab-1": {
+          "type": "tab",
+          "settings": {
+            "min": 0,
+            "max": 200,
+            "label": ""
+          }
+        },
+        "tab-2": {
+          "type": "tab",
+          "settings": {
+            "min": 200,
+            "max": 400,
+            "label": ""
+          }
+        },
+        "tab-3": {
+          "type": "tab",
+          "settings": {
+            "min": 400,
+            "max": 0,
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab-1",
+        "tab-2",
+        "tab-3"
+      ],
+      "settings": {
+        "collection": "gift-sets",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "gift_set_grid": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "All gift sets",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "gift-sets",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "faq": {
+      "type": "gifting-faq",
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "gifting_hero",
+    "budget_tabs",
+    "gift_set_grid",
+    "faq"
+  ]
+}

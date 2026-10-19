@@ -537,5 +537,40 @@
       "button": "Shop Ramadan gifts",
       "secondary_button": "Build your gift"
     }
+  },
+  "gifting": {
+    "hero": {
+      "eyebrow": "Eid gifting",
+      "heading": "Gifts for every moment of Eid",
+      "text": "Hand-picked perfume sets, wrapped and ready to give.",
+      "button": "Shop gift sets",
+      "countdown_label": "Eid al-Fitr begins in",
+      "countdown_done": "Eid Mubarak!",
+      "days": "Days",
+      "hours": "Hours",
+      "minutes": "Minutes",
+      "seconds": "Seconds"
+    },
+    "tabs": {
+      "heading": "Gifts by budget",
+      "under": "Under {{ currency }} {{ max }}",
+      "range": "{{ currency }} {{ min }} - {{ max }}",
+      "over": "{{ currency }} {{ min }}+",
+      "empty": "No gift sets in this budget yet. Check back soon.",
+      "add_tabs": "Add budget tabs in the theme editor."
+    },
+    "faq": {
+      "heading": "Gifting questions",
+      "q1": "When should I order for Eid delivery?",
+      "a1": "Orders placed at least five working days before Eid arrive in time within the UAE.",
+      "q2": "Can I add a gift message?",
+      "a2": "Yes. In your cart, tick \"This is a gift\" and write a message of up to 150 characters. It is printed on the packing slip.",
+      "q3": "Do you offer gift wrapping?",
+      "a3": "Yes. Add gift wrap in your cart for AED 15 per order.",
+      "q4": "Can I build my own gift box?",
+      "a4": "Yes. Choose any three perfumes and add them to your cart together as one box at a special box price.",
+      "q5": "What if the recipient does not like the gift?",
+      "a5": "Unopened gifts can be exchanged within 14 days. Just include the order number."
+    }
   }
 }

@@ -1,0 +1,217 @@
+{%- comment -%}
+  "Gifts by budget" tabs. Each tab block is a price range; products come from one collection and are
+  filtered by price in Liquid, so the merchant only manages the collection.
+  Max = 0 means no upper limit. Prices are compared in the store currency.
+{%- endcomment -%}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'gifting.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gifting-tabs.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'gifting.tabs.heading' | t
+  endif
+  assign gift_collection = section.settings.collection
+-%}
+
+<div id="gifts-by-budget" class="gifting-tabs color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <h2 class="title">{{ heading | escape }}</h2>
+
+    {%- if section.blocks.size == 0 -%}
+      <p class="gifting-tabs__empty">{{ 'gifting.tabs.add_tabs' | t }}</p>
+    {%- else -%}
+      <budget-tabs class="gifting-tabs__wrapper">
+        <div class="gifting-tabs__list" role="tablist" aria-label="{{ heading | escape }}">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign tab_label = block.settings.label
+              if tab_label == blank
+                if block.settings.min == 0
+                  assign tab_label = 'gifting.tabs.under' | t: currency: shop.currency, max: block.settings.max
+                elsif block.settings.max == 0
+                  assign tab_label = 'gifting.tabs.over' | t: currency: shop.currency, min: block.settings.min
+                else
+                  assign tab_label = 'gifting.tabs.range' | t: currency: shop.currency, min: block.settings.min, max: block.settings.max
+                endif
+              endif
+            -%}
+            <button
+              type="button"
+              class="gifting-tabs__tab"
+              role="tab"
+              id="Tab-{{ section.id }}-{{ forloop.index }}"
+              aria-controls="Panel-{{ section.id }}-{{ forloop.index }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {{ tab_label | escape }}
+            </button>
+          {%- endfor -%}
+        </div>
+
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign min_amount = block.settings.min | times: 100
+            assign max_amount = block.settings.max | times: 100
+            assign shown = 0
+          -%}
+          <div
+            class="gifting-tabs__panel"
+            role="tabpanel"
+            id="Panel-{{ section.id }}-{{ forloop.index }}"
+            aria-labelledby="Tab-{{ section.id }}-{{ forloop.index }}"
+            tabindex="0"
+            {% unless forloop.first %}hidden{% endunless %}
+          >
+            <ul class="grid product-grid grid--2-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop" role="list">
+              {%- for product in gift_collection.products -%}
+                {%- liquid
+                  assign in_range = false
+                  if product.price >= min_amount
+                    if block.settings.max == 0 or product.price < max_amount
+                      assign in_range = true
+                    endif
+                  endif
+                -%}
+                {%- if in_range -%}
+                  {%- assign shown = shown | plus: 1 -%}
+                  <li class="grid__item">
+                    {% render 'card-product',
+                      card_product: product,
+                      media_aspect_ratio: 'portrait',
+                      image_shape: 'default',
+                      lazy_load: true,
+                      show_secondary_image: true,
+                      show_vendor: false,
+                      show_rating: false,
+                      section_id: section.id,
+                      quick_add: 'standard',
+                      product_view_context: 'collection'
+                    %}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            {%- if shown == 0 -%}
+              <p class="gifting-tabs__empty">{{ 'gifting.tabs.empty' | t }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </budget-tabs>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{% schema %}
+{
+  "name": "Gifts by budget",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Gift collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave blank to use the built-in English/Arabic text."
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on desktop"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Budget tab",
+      "settings": [
+        {
+          "type": "number",
+          "id": "min",
+          "label": "From price",
+          "default": 0
+        },
+        {
+          "type": "number",
+          "id": "max",
+          "label": "Up to price (exclusive)",
+          "info": "0 means no upper limit.",
+          "default": 200
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Custom label",
+          "info": "Leave blank for an automatic label such as Under AED 200."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Gifts by budget",
+      "blocks": [
+        { "type": "tab", "settings": { "min": 0, "max": 200 } },
+        { "type": "tab", "settings": { "min": 200, "max": 400 } },
+        { "type": "tab", "settings": { "min": 400, "max": 0 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

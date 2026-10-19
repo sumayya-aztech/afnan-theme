@@ -68,19 +68,22 @@ h2.title {
 }
 
 /* Homepage: transparent header floating over the hero (the normal slideshow or the Ramadan hero) */
-.template-index .section-header {
+.template-index .section-header,
+.template-page-gifting .section-header {
   position: absolute;
   inset-inline: 0;
   width: 100%;
   z-index: 5;
 }
 
-.template-index .header-wrapper {
+.template-index .header-wrapper,
+.template-page-gifting .header-wrapper {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
   border-bottom: 0;
 }
 
-.template-index .header-wrapper--border-bottom {
+.template-index .header-wrapper--border-bottom,
+.template-page-gifting .header-wrapper--border-bottom {
   border-bottom: 0;
 }
 

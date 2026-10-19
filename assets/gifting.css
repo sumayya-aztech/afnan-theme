@@ -1,0 +1,243 @@
+/* Gifting landing page: hero + countdown, budget tabs, FAQ accordion. Logical properties keep it RTL-safe. */
+
+/* Hero */
+.gifting-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(48rem, 78vh, 76rem);
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(201, 162, 75, 0.3), transparent 55%),
+    linear-gradient(165deg, #0e1526, #05070d 85%);
+}
+
+.gifting-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.gifting-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gifting-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.3) 45%, rgba(0, 0, 0, 0.6));
+}
+
+.gifting-hero__inner {
+  max-width: 78rem;
+  padding-block: 20rem 7rem;
+}
+
+.gifting-hero__eyebrow {
+  margin: 0 0 1.6rem;
+  color: rgb(201, 162, 75);
+  font-size: 1.3rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+}
+
+.gifting-hero__heading {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(3.2rem, 2rem + 4vw, 6.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gifting-hero__text {
+  max-width: 56rem;
+  margin: 1.8rem auto 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1.5rem, 1.3rem + 0.5vw, 1.9rem);
+}
+
+.gifting-hero__button {
+  margin-top: 3.2rem;
+  min-width: 22rem;
+  --color-button: 201, 162, 75;
+  --color-button-text: 14, 21, 38;
+}
+
+/* Countdown */
+.gifting-countdown {
+  display: block;
+  margin-top: 3.2rem;
+}
+
+.gifting-countdown__label {
+  margin: 0 0 1.4rem;
+  font-size: 1.3rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.gifting-countdown__grid {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.gifting-countdown__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 7.6rem;
+  padding: 1.4rem 1rem 1.1rem;
+  border: 1px solid rgba(201, 162, 75, 0.7);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.gifting-countdown__value {
+  font-size: clamp(2.6rem, 2rem + 1.6vw, 4rem);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.gifting-countdown__name {
+  margin-top: 0.7rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(201, 162, 75);
+}
+
+/* Budget tabs */
+.gifting-tabs .title {
+  margin-bottom: 3.2rem;
+}
+
+.gifting-tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 3.2rem;
+}
+
+.gifting-tabs__tab {
+  padding: 1.2rem 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.35);
+  background: transparent;
+  color: rgb(var(--color-foreground));
+  font: inherit;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.gifting-tabs__tab:hover {
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.gifting-tabs__tab[aria-selected='true'] {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+}
+
+.gifting-tabs__tab:focus-visible,
+.gifting-tabs__panel:focus-visible,
+.gifting-faq__question:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 3px;
+}
+
+.gifting-tabs__empty {
+  text-align: center;
+  padding-block: 3rem;
+}
+
+/* FAQ accordion */
+.gifting-faq {
+  padding-block: 5rem;
+}
+
+.gifting-faq__inner {
+  max-width: 82rem;
+}
+
+.gifting-faq .title {
+  margin-bottom: 3rem;
+}
+
+.gifting-faq__item {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.2);
+}
+
+.gifting-faq__question {
+  position: relative;
+  display: block;
+  padding: 2rem 4rem 2rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  list-style: none;
+}
+
+.gifting-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.gifting-faq__question::after {
+  content: '+';
+  position: absolute;
+  inset-inline-end: 0.4rem;
+  top: 50%;
+  translate: 0 -50%;
+  font-size: 2.4rem;
+  font-weight: 300;
+  transition: rotate 0.2s;
+}
+
+.gifting-faq__item[open] .gifting-faq__question::after {
+  content: '\2212';
+}
+
+.gifting-faq__answer {
+  padding-bottom: 2.2rem;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+[dir='rtl'] .gifting-faq__question {
+  padding: 2rem 0 2rem 4rem;
+}
+
+@media screen and (max-width: 749px) {
+  .gifting-hero__inner {
+    padding-block: 15rem 5rem;
+  }
+
+  .gifting-countdown__grid {
+    gap: 0.6rem;
+  }
+
+  .gifting-countdown__unit {
+    min-width: 6.2rem;
+    padding: 1.1rem 0.6rem 0.9rem;
+  }
+
+  .gifting-tabs__tab {
+    padding: 1rem 1.4rem;
+    font-size: 1.2rem;
+  }
+}
