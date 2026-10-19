@@ -45,6 +45,7 @@
         data-box-variant="{{ box_variant.id }}"
         data-box-price="{{ box_variant.price }}"
         data-currency="{{ cart.currency.iso_code }}"
+        data-money-format="{{ shop.money_format | escape }}"
         data-cart-url="{{ routes.cart_url }}"
         data-add-url="{{ routes.cart_add_url }}"
         data-error="{{ 'gift_box.error' | t | escape }}"

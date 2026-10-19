@@ -1,0 +1,103 @@
+{%- comment -%}
+  Gift options on the cart page.
+  - "This is a gift" checkbox, gift message (max 150 characters) and gift wrap (+ price of the Gift Wrap product).
+  - Saved as cart attributes ("Gift", "Gift message", "Gift wrap"), which Shopify copies to the order
+    under "Additional details". Gift wrap is also a real cart line (the Gift Wrap product), so the charge
+    and the warehouse instruction are both on the order.
+  Needs the product with handle gift-wrap (default) and the cart type set to "Page".
+{%- endcomment -%}
+{{ 'cart-gift.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart-gift-options.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign wrap_product = section.settings.wrap_product
+  if wrap_product == blank
+    assign wrap_product = all_products['gift-wrap']
+  endif
+  assign wrap_variant = wrap_product.selected_or_first_available_variant
+  assign max_length = 150
+
+  assign wrap_in_cart = false
+  for item in cart.items
+    if item.product.handle == wrap_product.handle
+      assign wrap_in_cart = true
+    endif
+  endfor
+
+  assign gift_checked = false
+  if cart.attributes['Gift'] == 'Yes' or wrap_in_cart
+    assign gift_checked = true
+  endif
+-%}
+
+{%- if cart.item_count > 0 -%}
+  <cart-gift-options
+    class="cart-gift color-{{ section.settings.color_scheme }} gradient"
+    data-update-url="{{ routes.cart_update_url }}"
+    data-add-url="{{ routes.cart_add_url }}"
+    data-change-url="{{ routes.cart_change_url }}"
+    data-wrap-handle="{{ wrap_product.handle }}"
+    data-wrap-variant="{{ wrap_variant.id }}"
+    data-error="{{ 'cart_gift.error' | t | escape }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="page-width">
+      <div class="cart-gift__box">
+        <h2 class="cart-gift__title">{{ 'cart_gift.title' | t }}</h2>
+
+        <label class="cart-gift__check">
+          <input type="checkbox" data-gift {% if gift_checked %}checked{% endif %}>
+          <span>{{ 'cart_gift.is_gift' | t }}</span>
+        </label>
+
+        <div class="cart-gift__details" data-details {% unless gift_checked %}hidden{% endunless %}>
+          <label class="cart-gift__label" for="CartGiftMessage-{{ section.id }}">{{ 'cart_gift.message_label' | t }}</label>
+          <textarea
+            id="CartGiftMessage-{{ section.id }}"
+            class="cart-gift__message"
+            rows="3"
+            maxlength="{{ max_length }}"
+            data-message
+            placeholder="{{ 'cart_gift.message_placeholder' | t | escape }}"
+          >{{ cart.attributes['Gift message'] | escape }}</textarea>
+          <p class="cart-gift__counter" aria-live="polite">
+            <span data-count>0</span> / {{ max_length }}
+          </p>
+
+          {%- if wrap_variant != blank and wrap_variant.available -%}
+            <label class="cart-gift__check">
+              <input type="checkbox" data-wrap {% if wrap_in_cart %}checked{% endif %}>
+              <span>{{ 'cart_gift.wrap' | t }} (+{{ wrap_variant.price | money }})</span>
+            </label>
+          {%- else -%}
+            <p class="cart-gift__note">{{ 'cart_gift.wrap_unavailable' | t }}</p>
+          {%- endif -%}
+        </div>
+
+        <p class="cart-gift__status" role="status" aria-live="polite" data-status hidden></p>
+      </div>
+    </div>
+  </cart-gift-options>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart gift options",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "wrap_product",
+      "label": "Gift wrap product",
+      "info": "Defaults to the product with handle gift-wrap (AED 15)."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    }
+  ]
+}
+{% endschema %}

@@ -51,8 +51,30 @@ if (!customElements.get('gift-box-builder')) {
         }
       }
 
+      // Format like the rest of the store ("Dhs. 106.00") using the shop's money format.
       money(cents) {
-        return this.currency.format(cents / 100);
+        const format = this.dataset.moneyFormat;
+        if (!format) return this.currency.format(cents / 100);
+
+        const grouped = (value, separator, decimal) => {
+          const [whole, fraction] = value.toFixed(2).split('.');
+          return whole.replace(/\B(?=(\d{3})+(?!\d))/g, separator) + decimal + fraction;
+        };
+        const amount = cents / 100;
+        return format.replace(/{{\s*(\w+)\s*}}/, (match, name) => {
+          switch (name) {
+            case 'amount_no_decimals':
+              return String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            case 'amount_with_comma_separator':
+              return grouped(amount, '.', ',');
+            case 'amount_no_decimals_with_comma_separator':
+              return String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            case 'amount_with_apostrophe_separator':
+              return grouped(amount, "'", '.');
+            default:
+              return grouped(amount, ',', '.');
+          }
+        });
       }
 
       render() {

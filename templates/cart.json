@@ -17,6 +17,12 @@
         "padding_bottom": 36
       }
     },
+    "gift-options": {
+      "type": "cart-gift-options",
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    },
     "cart-footer": {
       "type": "main-cart-footer",
       "settings": {
@@ -27,13 +33,11 @@
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -44,6 +48,7 @@
   },
   "order": [
     "cart-items",
+    "gift-options",
     "cart-footer"
   ]
 }

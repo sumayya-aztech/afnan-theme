@@ -603,5 +603,14 @@
     "add": "Add gift box to cart",
     "error": "Sorry, the gift box could not be added. Please try again.",
     "not_configured": "The gift box product is not set up yet."
+  },
+  "cart_gift": {
+    "title": "Gift options",
+    "is_gift": "This is a gift",
+    "message_label": "Gift message (max 150 characters)",
+    "message_placeholder": "Write your message here",
+    "wrap": "Add gift wrap",
+    "wrap_unavailable": "Gift wrap is currently unavailable.",
+    "error": "Sorry, we could not save your gift options. Please try again."
   }
 }

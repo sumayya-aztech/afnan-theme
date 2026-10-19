@@ -1,0 +1,84 @@
+/* Cart gift options */
+.cart-gift {
+  padding-block: 1.6rem 0.4rem;
+}
+
+.cart-gift__box {
+  max-width: 60rem;
+  margin-inline-start: auto;
+  padding: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  background: rgb(var(--color-background));
+}
+
+.cart-gift__title {
+  margin: 0 0 1.6rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cart-gift__check {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block: 0.8rem;
+  cursor: pointer;
+}
+
+.cart-gift__check input {
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  accent-color: rgb(var(--color-foreground));
+}
+
+.cart-gift__details {
+  margin-top: 1.2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.12);
+}
+
+.cart-gift__details[hidden] {
+  display: none;
+}
+
+.cart-gift__label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 1.3rem;
+}
+
+.cart-gift__message {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 1px solid rgba(var(--color-foreground), 0.35);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  resize: vertical;
+}
+
+.cart-gift__counter {
+  margin: 0.4rem 0 1.2rem;
+  font-size: 1.2rem;
+  text-align: end;
+  color: rgba(var(--color-foreground), 0.65);
+}
+
+.cart-gift__note,
+.cart-gift__status {
+  margin: 1rem 0 0;
+  font-size: 1.3rem;
+}
+
+.cart-gift__status {
+  color: #b3261e;
+}
+
+@media screen and (max-width: 749px) {
+  .cart-gift__box {
+    max-width: none;
+    padding: 1.6rem;
+  }
+}
