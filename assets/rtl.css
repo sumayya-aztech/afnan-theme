@@ -8,7 +8,15 @@ html[dir='rtl'] h1,
 html[dir='rtl'] h2,
 html[dir='rtl'] h3,
 html[dir='rtl'] h4,
-html[dir='rtl'] h5 {
+html[dir='rtl'] h5,
+html[dir='rtl'] .title,
+html[dir='rtl'] .card__heading,
+html[dir='rtl'] .card__heading a,
+html[dir='rtl'] .header__menu-item,
+html[dir='rtl'] .header__menu-item span,
+html[dir='rtl'] .footer__heading,
+html[dir='rtl'] .footer-block__heading,
+html[dir='rtl'] .slideshow__text .banner__heading {
   letter-spacing: 0;
 }
 

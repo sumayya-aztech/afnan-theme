@@ -1,0 +1,84 @@
+/* Afnan storefront design layer: typography, buttons, cards and header polish on top of Dawn. */
+
+/* Section titles: small, uppercase, widely tracked, centred */
+.title,
+.collection-list-title,
+h2.title {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: clamp(1.8rem, 1.5rem + 0.8vw, 2.6rem);
+  font-weight: 600;
+  text-align: center;
+}
+
+.title-wrapper-with-link {
+  justify-content: center;
+  text-align: center;
+}
+
+/* Buttons: square, uppercase, compact */
+.button,
+.shopify-challenge__button,
+.customer button {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1.2rem;
+  min-height: 4.4rem;
+}
+
+/* Product cards: centred, quiet typography */
+.card__heading,
+.card__heading a {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 1.2rem;
+}
+
+.card-information {
+  text-align: center;
+}
+
+.card-information .price {
+  justify-content: center;
+}
+
+.card--standard .card__inner,
+.card--standard .card__media {
+  border-radius: 0;
+}
+
+/* Hero slideshow text */
+.slideshow__text .banner__heading {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* Header: uppercase navigation (the dark bar comes from the colour scheme in header-group.json) */
+.header__menu-item,
+.header__menu-item span {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 1.2rem;
+}
+
+.utility-bar .announcement-bar__message {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+.footer__heading,
+.footer-block__heading {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1.3rem;
+}
+
+/* Services row */
+.multicolumn .multicolumn-card__info .inline-richtext,
+.multicolumn-card__info h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 1.3rem;
+}
