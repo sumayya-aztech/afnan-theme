@@ -1,0 +1,34 @@
+{
+  "ramadan": {
+    "announcement": "رمضان كريم - أهدِ أحبّاءك من عفنان",
+    "banner": {
+      "heading": "هدايا رمضان",
+      "text": "هدايا عطور منتقاة بعناية لكل ميزانية.",
+      "button": "تسوّق الهدايا"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "أضف إلى السلة",
+      "sold_out": "نفدت الكمية",
+      "unavailable": "غير متاح"
+    }
+  },
+  "sections": {
+    "cart": {
+      "title": "سلة التسوق",
+      "checkout": "إتمام الشراء"
+    },
+    "header": {
+      "announcement": "إعلان"
+    }
+  },
+  "general": {
+    "search": {
+      "search": "بحث"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "انتقل إلى المحتوى"
+  }
+}

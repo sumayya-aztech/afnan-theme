@@ -53,7 +53,7 @@
         "type": "text",
         "id": "ramadan_announcement",
         "label": "Message",
-        "default": "Ramadan Kareem - gift your loved ones with Afnan"
+        "info": "Leave blank to use the built-in English/Arabic text. To override the Arabic text, use Translate & Adapt."
       },
       {
         "type": "url",
@@ -68,19 +68,19 @@
         "type": "text",
         "id": "ramadan_banner_heading",
         "label": "Heading",
-        "default": "Ramadan Gifting"
+        "info": "Leave blank to use the built-in English/Arabic text. To override the Arabic text, use Translate & Adapt."
       },
       {
         "type": "text",
         "id": "ramadan_banner_text",
         "label": "Text",
-        "default": "Thoughtfully curated perfume gifts for every budget."
+        "info": "Leave blank to use the built-in English/Arabic text. To override the Arabic text, use Translate & Adapt."
       },
       {
         "type": "text",
         "id": "ramadan_banner_button_label",
         "label": "Button label",
-        "default": "Shop gifts"
+        "info": "Leave blank to use the built-in English/Arabic text. To override the Arabic text, use Translate & Adapt."
       },
       {
         "type": "url",

@@ -1,0 +1,23 @@
+/* Loaded only for right-to-left languages (Arabic, Hebrew, Persian, Urdu). */
+
+/* Arabic letters join, so letter-spacing breaks the shapes */
+html[dir='rtl'] body,
+html[dir='rtl'] .announcement-bar__message,
+html[dir='rtl'] .button,
+html[dir='rtl'] h1,
+html[dir='rtl'] h2,
+html[dir='rtl'] h3,
+html[dir='rtl'] h4,
+html[dir='rtl'] h5 {
+  letter-spacing: 0;
+}
+
+/* Directional icons point the other way */
+html[dir='rtl'] .icon-arrow {
+  transform: scaleX(-1);
+}
+
+/* Dawn uses some physical offsets for the drawers and overlays */
+html[dir='rtl'] .cart-drawer .drawer__inner {
+  border-inline-start: var(--drawer-border-width) solid rgba(var(--color-foreground), var(--drawer-border-opacity));
+}

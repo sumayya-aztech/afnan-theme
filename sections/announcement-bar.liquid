@@ -25,12 +25,18 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
-    {%- if settings.ramadan_enabled and settings.ramadan_announcement != blank -%}
+    {%- if settings.ramadan_enabled -%}
       <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
         {%- if settings.ramadan_announcement_link != blank -%}
           <a href="{{ settings.ramadan_announcement_link }}" class="announcement-bar__link link link--text focus-inset">
         {%- endif -%}
-        <p class="announcement-bar__message h5"><span>{{ settings.ramadan_announcement | escape }}</span></p>
+        <p class="announcement-bar__message h5"><span>
+          {%- if settings.ramadan_announcement != blank -%}
+            {{- settings.ramadan_announcement | escape -}}
+          {%- else -%}
+            {{- 'ramadan.announcement' | t -}}
+          {%- endif -%}
+        </span></p>
         {%- if settings.ramadan_announcement_link != blank -%}
           </a>
         {%- endif -%}

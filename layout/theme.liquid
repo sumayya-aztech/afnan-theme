@@ -1,5 +1,16 @@
 <!doctype html>
-<html class="js{% if settings.ramadan_enabled %} ramadan-mode{% endif %}" lang="{{ request.locale.iso_code }}">
+{%- liquid
+  assign language_code = request.locale.iso_code | split: '-' | first
+  assign is_rtl = false
+  if language_code == 'ar' or language_code == 'he' or language_code == 'fa' or language_code == 'ur'
+    assign is_rtl = true
+  endif
+-%}
+<html
+  class="js{% if settings.ramadan_enabled %} ramadan-mode{% endif %}"
+  lang="{{ request.locale.iso_code }}"
+  dir="{% if is_rtl %}rtl{% else %}ltr{% endif %}"
+>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -290,6 +301,10 @@
     {%- endif -%}
 
     {% render 'ramadan-styles' %}
+
+    {%- if is_rtl -%}
+      {{ 'rtl.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}

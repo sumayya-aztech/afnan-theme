@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -527,6 +526,14 @@
       "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
+    }
+  },
+  "ramadan": {
+    "announcement": "Ramadan Kareem - gift your loved ones with Afnan",
+    "banner": {
+      "heading": "Ramadan Gifting",
+      "text": "Thoughtfully curated perfume gifts for every budget.",
+      "button": "Shop gifts"
     }
   }
 }
