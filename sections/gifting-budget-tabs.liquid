@@ -16,6 +16,13 @@
     assign heading = 'gifting.tabs.heading' | t
   endif
   assign gift_collection = section.settings.collection
+  assign filter_by_tag = false
+  assign gift_products = gift_collection.products
+  if gift_collection == blank or gift_collection.products_count == 0
+    assign filter_by_tag = true
+    assign gift_products = collections.all.products
+  endif
+  assign gift_tag = section.settings.fallback_tag
 -%}
 
 <div id="gifts-by-budget" class="gifting-tabs color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" {{ section.shopify_attributes }}>
@@ -70,9 +77,15 @@
             {% unless forloop.first %}hidden{% endunless %}
           >
             <ul class="grid product-grid grid--2-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop" role="list">
-              {%- for product in gift_collection.products -%}
+              {%- for product in gift_products -%}
                 {%- liquid
                   assign in_range = false
+                  assign has_gift_tag = product.tags contains gift_tag
+                  if filter_by_tag
+                    unless has_gift_tag
+                      continue
+                    endunless
+                  endif
                   if product.price >= min_amount
                     if block.settings.max == 0 or product.price < max_amount
                       assign in_range = true
@@ -131,7 +144,14 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Gift collection"
+      "label": "Gift collection",
+      "info": "If empty or not found, products with the fallback tag below are used."
+    },
+    {
+      "type": "text",
+      "id": "fallback_tag",
+      "label": "Fallback product tag",
+      "default": "Gift Set"
     },
     {
       "type": "text",
