@@ -45,7 +45,7 @@
         "slide_height": "large",
         "slider_visual": "buttons",
         "auto_rotate": true,
-        "change_slides_speed": 6,
+        "change_slides_speed": 7,
         "show_text_below": false,
         "accessibility_info": "Slideshow about our brand"
       }
@@ -166,7 +166,7 @@
         "button"
       ],
       "settings": {
-        "image_overlay_opacity": 35,
+        "image_overlay_opacity": 40,
         "image_height": "medium",
         "desktop_content_position": "middle-center",
         "show_text_box": false,
