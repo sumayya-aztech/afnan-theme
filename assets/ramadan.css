@@ -7,8 +7,10 @@
   background: rgb(var(--ramadan-primary));
 }
 
-.ramadan-mode .utility-bar .announcement-bar__message {
+.ramadan-mode .utility-bar .announcement-bar__message,
+.ramadan-mode .utility-bar .announcement-bar__message span {
   color: rgb(var(--ramadan-accent));
+  opacity: 1;
 }
 
 .ramadan-mode .announcement-bar__message::before,
@@ -18,7 +20,7 @@
 }
 
 /* Header: keeps the transparent overlay on the homepage; gold hairline elsewhere */
-.ramadan-mode body:not(.template-index) .header-wrapper {
+.ramadan-mode body:not(.template-index):not(.template-page-gifting) .header-wrapper {
   border-bottom: 1px solid rgba(var(--ramadan-accent), 0.7);
 }
 
@@ -73,7 +75,7 @@
 .ramadan-hero::after {
   content: '';
   position: absolute;
-  inset: 2.4rem;
+  inset: 24rem 2.4rem 2.4rem;
   z-index: -1;
   border: 1px solid rgba(var(--ramadan-accent), 0.55);
   pointer-events: none;
@@ -81,7 +83,7 @@
 
 .ramadan-hero__inner {
   max-width: 78rem;
-  padding: 14rem 2.4rem 8rem;
+  padding: 30rem 2.4rem 9rem;
 }
 
 .ramadan-hero__eyebrow {
@@ -157,11 +159,11 @@
   }
 
   .ramadan-hero::after {
-    inset: 1.2rem;
+    inset: 14rem 1.2rem 1.2rem;
   }
 
   .ramadan-hero__inner {
-    padding: 12rem 2rem 6rem;
+    padding: 18rem 2rem 6rem;
   }
 
   .ramadan-hero__eyebrow::before,
