@@ -13,19 +13,8 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0"
-      ],
-      "disabled": true,
+      "blocks": {},
+      "block_order": [],
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
@@ -42,7 +31,7 @@
         "logo_position": "top-center",
         "mobile_logo_position": "center",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": true,
         "color_scheme": "scheme-4",
@@ -53,15 +42,10 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
-    },
-    "ramadan-banner": {
-      "type": "ramadan-banner",
-      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header",
-    "ramadan-banner"
+    "header"
   ]
 }

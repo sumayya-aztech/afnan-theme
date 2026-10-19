@@ -1,3 +1,8 @@
+{%- comment -%}
+  Renders nothing when there are no announcements, no selectors and Ramadan mode is off,
+  so the store has no empty bar at the top.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 or settings.ramadan_enabled or section.settings.enable_country_selector or section.settings.enable_language_selector or section.settings.show_social -%}
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 
@@ -177,6 +182,8 @@
     </div>
   </div>
 </div>
+
+{%- endif -%}
 
 {% schema %}
 {
