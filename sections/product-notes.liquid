@@ -14,7 +14,11 @@
   if subheading == blank
     assign subheading = 'product_page.notes.subheading' | t
   endif
-  assign top_notes = product.metafields.custom.top_notes.value | join: ',' | split: ','
+  assign top_source = product.metafields.custom.top_notes.value
+  if top_source == blank
+    assign top_source = product.metafields.custom.custom_top_notes.value
+  endif
+  assign top_notes = top_source | join: ',' | split: ','
   assign middle_notes = product.metafields.custom.middle_notes.value | join: ',' | split: ','
   assign base_notes = product.metafields.custom.base_notes.value | join: ',' | split: ','
 -%}
