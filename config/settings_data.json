@@ -9,7 +9,7 @@
  */
 {
   "current": {
-    "ramadan_enabled": false,
+    "ramadan_enabled": true,
     "logo": "shopify://shop_images/white_afnan_logo_5ba6564f-ac22-4aea-946f-4d8ee21ac34e.avif",
     "logo_width": 300,
     "type_header_font": "assistant_n4",
