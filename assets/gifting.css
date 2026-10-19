@@ -474,3 +474,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* The savings row must stay hidden until the box is full (display:flex above would override [hidden]) */
+.gift-box__totals [hidden] {
+  display: none;
+}
