@@ -1,0 +1,71 @@
+{%- comment -%}
+  Free gift with purchase: cart behaviour and messages.
+
+  Rule: when the cart has any product from the qualifying collection (default: femme-collection),
+  the free gift product (default: free-gift-mini-perfume) is added automatically; when the last
+  qualifying product is removed, the gift is removed too. Only one gift per cart (quantity capped at 1).
+  The price comes from an automatic "Buy X Get Y" discount in Shopify admin; this section only manages the line.
+
+  Configure in Theme settings > Free gift with purchase.
+{%- endcomment -%}
+{%- liquid
+  assign gift_product = settings.gwp_product
+  if gift_product == blank
+    assign gift_product = all_products['free-gift-mini-perfume']
+  endif
+  assign gift_variant = gift_product.selected_or_first_available_variant
+
+  assign qualifying = settings.gwp_collection
+  if qualifying == blank
+    assign qualifying = collections['femme-collection']
+  endif
+
+  assign qualifying_ids = ''
+  for product in qualifying.products
+    assign qualifying_ids = qualifying_ids | append: product.id | append: ','
+  endfor
+  assign qualifying_ids = qualifying_ids | split: ',' | join: ','
+-%}
+
+{%- if settings.gwp_enabled and gift_variant != blank and cart.item_count > 0 -%}
+  <script src="{{ 'gwp-cart.js' | asset_url }}" defer="defer"></script>
+  {{ 'gwp.css' | asset_url | stylesheet_tag }}
+
+  <free-gift-manager
+    class="gwp page-width"
+    data-qualifying="{{ qualifying_ids }}"
+    data-gift-handle="{{ gift_product.handle }}"
+    data-gift-variant="{{ gift_variant.id }}"
+    data-gift-available="{{ gift_variant.available }}"
+    data-add-url="{{ routes.cart_add_url }}"
+    data-change-url="{{ routes.cart_change_url }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="gwp__banner gwp__banner--unlocked" data-unlocked hidden role="status">
+      <strong>{{ 'gwp.unlocked_title' | t }}</strong>
+      <span>{{ 'gwp.unlocked_text' | t: gift: gift_product.title }}</span>
+    </div>
+    <div class="gwp__banner gwp__banner--locked" data-locked hidden>
+      <strong>{{ 'gwp.locked_title' | t }}</strong>
+      <span>{{ 'gwp.locked_text' | t }}</span>
+    </div>
+    <div class="gwp__banner gwp__banner--oos" data-out-of-stock hidden role="status">
+      <strong>{{ 'gwp.oos_title' | t }}</strong>
+      <span>{{ 'gwp.oos_text' | t }}</span>
+    </div>
+  </free-gift-manager>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Free gift (cart)",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Configured in Theme settings > Free gift with purchase."
+    }
+  ]
+}
+{% endschema %}

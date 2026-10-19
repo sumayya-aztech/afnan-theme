@@ -41,6 +41,12 @@
             "custom_liquid": "{% render 'product-delivery' %}"
           }
         },
+        "gwp_message": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% render 'gwp-product-message' %}"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -96,6 +102,7 @@
         "variant_picker",
         "quantity_selector",
         "delivery",
+        "gwp_message",
         "buy_buttons",
         "trust",
         "description_tab",

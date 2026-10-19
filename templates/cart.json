@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "gwp": {
+      "type": "gwp-cart",
+      "settings": {}
+    },
     "cart-items": {
       "type": "main-cart-items",
       "settings": {
@@ -47,6 +51,7 @@
     }
   },
   "order": [
+    "gwp",
     "cart-items",
     "gift-options",
     "cart-footer"

@@ -113,6 +113,30 @@
     ]
   },
   {
+    "name": "Free gift with purchase",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "gwp_enabled",
+        "label": "Enable free gift with purchase",
+        "default": true,
+        "info": "Buy any product from the qualifying collection and a free gift is added to the cart automatically. The price comes from an automatic Buy X Get Y discount in Shopify admin."
+      },
+      {
+        "type": "collection",
+        "id": "gwp_collection",
+        "label": "Qualifying collection",
+        "info": "Defaults to the collection with handle femme-collection."
+      },
+      {
+        "type": "product",
+        "id": "gwp_product",
+        "label": "Free gift product",
+        "info": "Defaults to the product with handle free-gift-mini-perfume."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

@@ -612,5 +612,14 @@
     "wrap": "Add gift wrap",
     "wrap_unavailable": "Gift wrap is currently unavailable.",
     "error": "Sorry, we could not save your gift options. Please try again."
+  },
+  "gwp": {
+    "unlocked_title": "You've unlocked a free gift",
+    "unlocked_text": "{{ gift }} has been added to your cart.",
+    "locked_title": "Free gift with purchase",
+    "locked_text": "Add any product from the Femme Collection to unlock a free gift.",
+    "oos_title": "Your free gift is out of stock",
+    "oos_text": "You've unlocked a free gift, but it is out of stock right now. Your order is not affected.",
+    "product_text": "Add this to your cart and {{ gift }} is added free, automatically."
   }
 }
