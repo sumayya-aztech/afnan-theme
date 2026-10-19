@@ -241,3 +241,236 @@
     font-size: 1.2rem;
   }
 }
+
+/* Build-your-own gift box */
+.gift-box {
+  padding-block: 5rem;
+}
+
+.gift-box__intro {
+  max-width: 60rem;
+  margin: 0 auto 3.2rem;
+  text-align: center;
+}
+
+.gift-box__notice {
+  text-align: center;
+}
+
+.gift-box__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 32rem;
+  gap: 3.2rem;
+  align-items: start;
+}
+
+.gift-box__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gift-box__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  background: rgb(var(--color-background));
+  text-align: center;
+  cursor: pointer;
+}
+
+.gift-box__card.is-selected {
+  border-color: rgb(var(--color-foreground));
+  box-shadow: 0 0 0 1px rgb(var(--color-foreground));
+}
+
+.gift-box__card.is-sold-out,
+.gift-box__input:disabled ~ .gift-box__title {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gift-box__input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: inherit;
+}
+
+.gift-box__input:focus-visible ~ .gift-box__media {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: -2px;
+}
+
+.gift-box__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: rgba(var(--color-foreground), 0.04);
+}
+
+.gift-box__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gift-box__check {
+  position: absolute;
+  inset-block-start: 0.8rem;
+  inset-inline-end: 0.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.4);
+  border-radius: 50%;
+  background: rgb(var(--color-background));
+}
+
+.gift-box__card.is-selected .gift-box__check {
+  background: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+}
+
+.gift-box__card.is-selected .gift-box__check::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.8rem;
+  width: 0.6rem;
+  height: 1.1rem;
+  border: solid rgb(var(--color-background));
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.gift-box__title {
+  padding: 1rem 0.8rem 0.2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.gift-box__price {
+  padding: 0 0.8rem 1.2rem;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.gift-box__summary {
+  position: sticky;
+  top: 2rem;
+  padding: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.2);
+  background: rgb(var(--color-background));
+}
+
+.gift-box__summary-title {
+  margin: 0 0 0.4rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.gift-box__counter {
+  margin: 0 0 1.6rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.gift-box__slots {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0 0 1.6rem;
+  padding: 0;
+  list-style: none;
+}
+
+.gift-box__slot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 5.2rem;
+  padding: 0.6rem 1rem;
+  border: 1px dashed rgba(var(--color-foreground), 0.35);
+  font-size: 1.3rem;
+}
+
+.gift-box__slot.is-filled {
+  border-style: solid;
+}
+
+.gift-box__slot-label {
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.gift-box__slot img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+}
+
+.gift-box__slot-name {
+  flex: 1;
+}
+
+.gift-box__slot-remove {
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gift-box__totals {
+  margin: 0 0 1.6rem;
+}
+
+.gift-box__totals div {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.4rem;
+}
+
+.gift-box__totals dt,
+.gift-box__totals dd {
+  margin: 0;
+}
+
+.gift-box__savings {
+  color: #1b7a3d;
+  font-weight: 600;
+}
+
+.gift-box__message {
+  margin: 1rem 0 0;
+  color: #b3261e;
+}
+
+@media screen and (max-width: 989px) {
+  .gift-box__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .gift-box__summary {
+    position: static;
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .gift-box__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

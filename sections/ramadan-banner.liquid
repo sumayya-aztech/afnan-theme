@@ -22,6 +22,9 @@
     endif
     assign banner_link = settings.ramadan_banner_link | default: collections['gift-sets'].url | default: routes.all_products_collection_url
     assign gifting_link = pages['ramadan-gifting'].url
+    if gifting_link != blank
+      assign gifting_link = gifting_link | append: '#build-your-own-box'
+    endif
   -%}
   <section class="ramadan-hero" aria-label="{{ banner_heading | escape }}">
     {%- if settings.ramadan_banner_image != blank -%}

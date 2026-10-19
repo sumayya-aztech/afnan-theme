@@ -591,5 +591,17 @@
       "heart": "Heart notes",
       "dry_down": "Dry-down notes"
     }
+  },
+  "gift_box": {
+    "heading": "Build your own gift box",
+    "text": "Choose any 3 perfumes and we will pack them together in one gift box at a special box price.",
+    "your_box": "Your box",
+    "selected": "selected",
+    "pick_label": "Perfume",
+    "box_price": "Box price",
+    "you_save": "You save",
+    "add": "Add gift box to cart",
+    "error": "Sorry, the gift box could not be added. Please try again.",
+    "not_configured": "The gift box product is not set up yet."
   }
 }

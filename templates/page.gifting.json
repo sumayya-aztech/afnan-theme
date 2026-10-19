@@ -45,6 +45,14 @@
         "padding_bottom": 48
       }
     },
+    "gift_box": {
+      "type": "gift-box-builder",
+      "settings": {
+        "perfume_tag": "Perfume",
+        "variant_size": "50 ML",
+        "color_scheme": "scheme-2"
+      }
+    },
     "gift_set_grid": {
       "type": "featured-collection",
       "settings": {
@@ -83,6 +91,7 @@
   "order": [
     "gifting_hero",
     "budget_tabs",
+    "gift_box",
     "gift_set_grid",
     "faq"
   ]
