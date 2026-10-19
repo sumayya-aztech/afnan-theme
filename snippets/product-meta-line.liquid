@@ -1,0 +1,8 @@
+{%- comment -%}
+  Scent family line under the title, e.g. "AMBER | FRUITY".
+  Reads product metafield custom.scent_family (single line text). Renders nothing when empty.
+{%- endcomment -%}
+{%- assign scent_family = product.metafields.custom.scent_family.value -%}
+{%- if scent_family != blank -%}
+  <p class="pdp-scent-family">{{ scent_family | escape }}</p>
+{%- endif -%}

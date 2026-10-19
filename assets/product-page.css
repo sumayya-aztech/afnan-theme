@@ -1,0 +1,252 @@
+/* Product page design layer. Loaded on product templates only. */
+
+/* Info column */
+.template-product .product__info-container .product__title h1,
+.template-product .product__title h1 {
+  font-size: clamp(1.9rem, 1.6rem + 0.8vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.template-product .product__text.caption-with-letter-spacing,
+.template-product .product__text.uppercase {
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+.pdp-scent-family {
+  margin: 0 0 0.6rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.6);
+}
+
+/* Price: red sale price, struck-through compare price */
+.template-product .price--on-sale .price-item--sale,
+.template-product .price__sale .price-item--sale {
+  color: #d6283b;
+  font-weight: 600;
+}
+
+.template-product .price .price-item--regular {
+  font-size: 1.5rem;
+}
+
+/* Square variant pills and compact option labels */
+.template-product {
+  --variant-pills-radius: 0px;
+}
+
+.template-product .product-form__input legend.form__label {
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Estimated delivery */
+.pdp-delivery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 1.6rem 0;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid rgba(var(--color-foreground), 0.15);
+  background: rgba(var(--color-foreground), 0.02);
+}
+
+.pdp-delivery__label {
+  font-size: 1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.pdp-delivery__dates {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+}
+
+/* Buttons: black, square, full width */
+.template-product .product-form__submit,
+.template-product .shopify-payment-button__button--unbranded {
+  border-radius: 0;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.template-product .shopify-payment-button__button--unbranded {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+/* Trust icons */
+.pdp-trust {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2.4rem 0 1.6rem;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.pdp-trust__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Accordion tabs: uppercase small headings with a plus/minus marker */
+.template-product .product__accordion {
+  border-top: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.template-product .product__accordion:last-of-type {
+  border-bottom: 1px solid rgba(var(--color-foreground), 0.15);
+}
+
+.template-product .product__accordion .accordion__title {
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.template-product .product__accordion summary > .icon-caret {
+  display: none;
+}
+
+.template-product .product__accordion summary::after {
+  content: '+';
+  margin-inline-start: auto;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.template-product .product__accordion details[open] > summary::after {
+  content: '\2212';
+}
+
+.template-product .product__accordion summary {
+  display: flex;
+  align-items: center;
+}
+
+.pdp-notes-line {
+  margin: 0 0 0.6rem;
+}
+
+/* Discover the notes */
+.pdp-discover {
+  padding-block: 6rem;
+  background: linear-gradient(135deg, var(--discover-bg, #3a0d12), var(--discover-bg-end, #6e1118));
+  color: #fff;
+}
+
+.pdp-discover__heading {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2.4rem, 2rem + 1.4vw, 3.6rem);
+  font-weight: 600;
+  color: #fff;
+}
+
+.pdp-discover__subheading {
+  margin: 1rem 0 4rem;
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pdp-discover__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
+}
+
+.pdp-discover__card {
+  overflow: hidden;
+  border-radius: 1rem;
+  background: #fff;
+  color: #1c1c1c;
+}
+
+.pdp-discover__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #eee;
+}
+
+.pdp-discover__media img,
+.pdp-discover__media svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-discover__body {
+  padding: 2rem 2.4rem 2.4rem;
+}
+
+.pdp-discover__title {
+  margin: 0 0 1.4rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  font-size: 1.3rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #1c1c1c;
+}
+
+.pdp-discover__notes {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pdp-discover__notes li {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+}
+
+.pdp-discover__notes li::before {
+  content: '';
+  flex: none;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: #c9a24b;
+}
+
+@media screen and (max-width: 749px) {
+  .pdp-discover {
+    padding-block: 4rem;
+  }
+
+  .pdp-discover__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pdp-trust {
+    gap: 0.4rem;
+  }
+}

@@ -572,5 +572,24 @@
       "q5": "What if the recipient does not like the gift?",
       "a5": "Unopened gifts can be exchanged within 14 days. Just include the order number."
     }
+  },
+  "product_page": {
+    "estimated_delivery": "Estimated delivery",
+    "trust": {
+      "craftsmanship": "Premium craftsmanship",
+      "returns": "14 days returns",
+      "non_toxic": "Non toxic"
+    },
+    "notes": {
+      "tab": "Notes",
+      "top": "Top notes",
+      "middle": "Middle notes",
+      "base": "Base notes",
+      "heading": "Discover the notes",
+      "subheading": "Explore the fragrance journey from top to base",
+      "opening": "Opening notes",
+      "heart": "Heart notes",
+      "dry_down": "Dry-down notes"
+    }
   }
 }

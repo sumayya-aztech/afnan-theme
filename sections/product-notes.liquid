@@ -1,0 +1,123 @@
+{%- comment -%}
+  "Discover the notes": three cards (opening, heart, dry-down) listing the fragrance notes.
+  Notes come from product metafields custom.top_notes / middle_notes / base_notes
+  (list of single line text, or comma separated text). Hidden when none are filled in.
+{%- endcomment -%}
+{{ 'product-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading = section.settings.heading
+  if heading == blank
+    assign heading = 'product_page.notes.heading' | t
+  endif
+  assign subheading = section.settings.subheading
+  if subheading == blank
+    assign subheading = 'product_page.notes.subheading' | t
+  endif
+  assign top_notes = product.metafields.custom.top_notes.value | join: ',' | split: ','
+  assign middle_notes = product.metafields.custom.middle_notes.value | join: ',' | split: ','
+  assign base_notes = product.metafields.custom.base_notes.value | join: ',' | split: ','
+-%}
+
+{%- if top_notes.size > 0 or middle_notes.size > 0 or base_notes.size > 0 -%}
+  <div class="pdp-discover" style="--discover-bg: {{ section.settings.background }}; --discover-bg-end: {{ section.settings.background_end }};" {{ section.shopify_attributes }}>
+    <div class="page-width">
+      <h2 class="pdp-discover__heading">{{ heading | escape }}</h2>
+      <p class="pdp-discover__subheading">{{ subheading | escape }}</p>
+
+      <div class="pdp-discover__grid">
+        {%- for index in (1..3) -%}
+          {%- liquid
+            case index
+              when 1
+                assign card_notes = top_notes
+                assign card_title = 'product_page.notes.opening' | t
+                assign card_image = section.settings.image_1
+              when 2
+                assign card_notes = middle_notes
+                assign card_title = 'product_page.notes.heart' | t
+                assign card_image = section.settings.image_2
+              else
+                assign card_notes = base_notes
+                assign card_title = 'product_page.notes.dry_down' | t
+                assign card_image = section.settings.image_3
+            endcase
+          -%}
+          <article class="pdp-discover__card">
+            <div class="pdp-discover__media">
+              {%- if card_image != blank -%}
+                {{ card_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: card_title, widths: '400, 600, 800' }}
+              {%- else -%}
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+            </div>
+            <div class="pdp-discover__body">
+              <h3 class="pdp-discover__title">{{ card_title | escape }}</h3>
+              <ul class="pdp-discover__notes" role="list">
+                {%- for note in card_notes -%}
+                  {%- assign clean_note = note | strip -%}
+                  {%- if clean_note != blank -%}
+                    <li>{{ clean_note | escape }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Discover the notes",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Leave text fields blank to use the built-in English/Arabic text."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Opening notes image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Heart notes image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Dry-down notes image"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background start",
+      "default": "#3a0d12"
+    },
+    {
+      "type": "color",
+      "id": "background_end",
+      "label": "Background end",
+      "default": "#6e1118"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discover the notes"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+{%- comment -%}
+  Estimated delivery window: tomorrow to the day after (store time).
+{%- endcomment -%}
+{%- liquid
+  assign now_seconds = 'now' | date: '%s' | plus: 0
+  assign from_date = now_seconds | plus: 86400
+  assign to_date = now_seconds | plus: 172800
+-%}
+<div class="pdp-delivery">
+  <span class="pdp-delivery__label">{{ 'product_page.estimated_delivery' | t }}</span>
+  <strong class="pdp-delivery__dates">{{ from_date | date: '%b %d' }} - {{ to_date | date: '%b %d' }}</strong>
+</div>
