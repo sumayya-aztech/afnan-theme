@@ -1,0 +1,38 @@
+﻿{%- comment -%}
+  Sitewide Ramadan banner. Controlled from Theme settings > Ramadan mode; renders nothing when off.
+{%- endcomment -%}
+{%- if settings.ramadan_enabled -%}
+  <section class="ramadan-banner" aria-label="{{ settings.ramadan_banner_heading | escape }}">
+    {%- if settings.ramadan_banner_image != blank -%}
+      <div class="ramadan-banner__media">
+        {{ settings.ramadan_banner_image | image_url: width: 1800 | image_tag: loading: 'lazy', alt: '' }}
+      </div>
+    {%- endif -%}
+    <div class="ramadan-banner__inner page-width">
+      <p class="ramadan-banner__eyebrow" aria-hidden="true">&#9790;</p>
+      {%- if settings.ramadan_banner_heading != blank -%}
+        <h2 class="ramadan-banner__heading h1">{{ settings.ramadan_banner_heading | escape }}</h2>
+      {%- endif -%}
+      {%- if settings.ramadan_banner_text != blank -%}
+        <p class="ramadan-banner__text">{{ settings.ramadan_banner_text | escape }}</p>
+      {%- endif -%}
+      {%- if settings.ramadan_banner_button_label != blank and settings.ramadan_banner_link != blank -%}
+        <a href="{{ settings.ramadan_banner_link }}" class="ramadan-banner__button button">
+          {{ settings.ramadan_banner_button_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Ramadan banner",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Content and visibility are managed in Theme settings > Ramadan mode."
+    }
+  ]
+}
+{% endschema %}

@@ -8,6 +8,104 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Ramadan mode",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "ramadan_enabled",
+        "label": "Enable Ramadan mode",
+        "default": false,
+        "info": "Switches the header, announcement bar, colours and banner to the Ramadan look. Turn off to return the store to normal."
+      },
+      {
+        "type": "header",
+        "content": "Colours"
+      },
+      {
+        "type": "color",
+        "id": "ramadan_primary",
+        "label": "Primary (header, announcement bar, buttons)",
+        "default": "#0B3B35"
+      },
+      {
+        "type": "color",
+        "id": "ramadan_accent",
+        "label": "Accent (gold)",
+        "default": "#C9A24B"
+      },
+      {
+        "type": "color",
+        "id": "ramadan_background",
+        "label": "Page background",
+        "default": "#FBF7EC"
+      },
+      {
+        "type": "color",
+        "id": "ramadan_text",
+        "label": "Text",
+        "default": "#1E2A28"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "text",
+        "id": "ramadan_announcement",
+        "label": "Message",
+        "default": "Ramadan Kareem - gift your loved ones with Afnan"
+      },
+      {
+        "type": "url",
+        "id": "ramadan_announcement_link",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "text",
+        "id": "ramadan_banner_heading",
+        "label": "Heading",
+        "default": "Ramadan Gifting"
+      },
+      {
+        "type": "text",
+        "id": "ramadan_banner_text",
+        "label": "Text",
+        "default": "Thoughtfully curated perfume gifts for every budget."
+      },
+      {
+        "type": "text",
+        "id": "ramadan_banner_button_label",
+        "label": "Button label",
+        "default": "Shop gifts"
+      },
+      {
+        "type": "url",
+        "id": "ramadan_banner_link",
+        "label": "Button link"
+      },
+      {
+        "type": "image_picker",
+        "id": "ramadan_banner_image",
+        "label": "Background image (optional)"
+      },
+      {
+        "type": "header",
+        "content": "Eid countdown"
+      },
+      {
+        "type": "text",
+        "id": "ramadan_eid_date",
+        "label": "Eid date (YYYY-MM-DD)",
+        "default": "2027-03-09",
+        "info": "Used by the countdown on the gifting page."
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

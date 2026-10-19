@@ -1,0 +1,44 @@
+﻿{%- comment -%}
+  Ramadan mode: colour overrides driven by the theme settings (Theme settings > Ramadan mode).
+  Renders nothing when the setting is off, so the store falls back to the normal theme.
+{%- endcomment -%}
+{%- if settings.ramadan_enabled -%}
+  {{ 'ramadan.css' | asset_url | stylesheet_tag }}
+  {%- liquid
+    assign r_primary = settings.ramadan_primary
+    assign r_accent = settings.ramadan_accent
+    assign r_background = settings.ramadan_background
+    assign r_text = settings.ramadan_text
+  -%}
+  {% style %}
+    :root.ramadan-mode {
+      --ramadan-primary: {{ r_primary.red }},{{ r_primary.green }},{{ r_primary.blue }};
+      --ramadan-accent: {{ r_accent.red }},{{ r_accent.green }},{{ r_accent.blue }};
+      --ramadan-background: {{ r_background.red }},{{ r_background.green }},{{ r_background.blue }};
+      --ramadan-text: {{ r_text.red }},{{ r_text.green }},{{ r_text.blue }};
+    }
+
+    {%- for scheme in settings.color_schemes -%}
+      {%- assign scheme_brightness = scheme.settings.background | color_brightness -%}
+      {%- if forloop.first -%}
+        :root.ramadan-mode,
+      {%- endif -%}
+      .ramadan-mode .color-{{ scheme.id }} {
+        {%- if forloop.first %}
+        --color-background: var(--ramadan-background);
+        --gradient-background: rgb(var(--ramadan-background));
+        --color-foreground: var(--ramadan-text);
+        {%- endif %}
+        {%- if scheme_brightness <= 65 %}
+        --color-button: var(--ramadan-accent);
+        --color-button-text: var(--ramadan-primary);
+        {%- else %}
+        --color-button: var(--ramadan-primary);
+        --color-button-text: 255,255,255;
+        {%- endif %}
+        --color-link: var(--ramadan-primary);
+        --color-secondary-button-text: var(--ramadan-primary);
+      }
+    {%- endfor -%}
+  {% endstyle %}
+{%- endif -%}

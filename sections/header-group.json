@@ -45,10 +45,15 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "ramadan-banner": {
+      "type": "ramadan-banner",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "ramadan-banner"
   ]
 }

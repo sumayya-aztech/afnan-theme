@@ -9,7 +9,7 @@
   if section.settings.enable_country_selector or section.settings.enable_language_selector
     assign language_country_selector = true
   endif
-  if section.blocks.size > 0
+  if section.blocks.size > 0 or settings.ramadan_enabled
     assign announcement_bar = true
   endif
 -%}
@@ -25,7 +25,17 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
-    {%- if section.blocks.size == 1 -%}
+    {%- if settings.ramadan_enabled and settings.ramadan_announcement != blank -%}
+      <div class="announcement-bar" role="region" aria-label="{{ 'sections.header.announcement' | t }}">
+        {%- if settings.ramadan_announcement_link != blank -%}
+          <a href="{{ settings.ramadan_announcement_link }}" class="announcement-bar__link link link--text focus-inset">
+        {%- endif -%}
+        <p class="announcement-bar__message h5"><span>{{ settings.ramadan_announcement | escape }}</span></p>
+        {%- if settings.ramadan_announcement_link != blank -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- elsif section.blocks.size == 1 -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
