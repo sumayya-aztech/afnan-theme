@@ -1,99 +1,146 @@
-# Dawn
+# Afnan Perfumes: Ramadan gifting, free gift and loyalty (Shopify theme)
 
-[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
+A Shopify theme built on [Dawn 16](https://github.com/Shopify/dawn) for a perfume store. It adds a merchant-controlled
+Ramadan look, a gifting experience (landing page, build-your-own gift box, cart gift options), a free-gift-with-purchase
+rule and a loyalty programme front end. Everything user-facing works in English and Arabic (right-to-left).
 
-[Getting started](#getting-started) |
-[Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
-[Developer tools](#developer-tools) |
-[Contributing](#contributing) |
-[Code of conduct](#code-of-conduct) |
-[Theme Store submission](#theme-store-submission) |
-[License](#license)
+- Store: `https://afnan-perfumes-fuho9rct.myshopify.com` (storefront password is in the submission message, not in this repo)
+- Theme name on the store: `afnan-ramadan`
 
-Dawn represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
+## Task map
 
-* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
-* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+| Brief | Where it lives |
+|---|---|
+| 1.1 Ramadan on/off (header, announcement bar, colours, banner) | Theme settings > **Ramadan mode**. `snippets/ramadan-styles.liquid`, `assets/ramadan.css`, `sections/ramadan-banner.liquid`, `sections/announcement-bar.liquid` |
+| 1.1 Gifting landing page (Eid countdown, budget tabs, grid, FAQ) | `templates/page.gifting.json`, `sections/gifting-hero.liquid`, `gifting-budget-tabs.liquid`, `gifting-faq.liquid`, `assets/gifting-*.js` |
+| 1.2 Build-your-own gift box (any 3 perfumes, box price) | `sections/gift-box-builder.liquid`, `assets/gift-box.js` |
+| 1.2 Gift options at cart (gift checkbox, 150-char message, wrap +AED 15) | `sections/cart-gift-options.liquid`, `assets/cart-gift-options.js` |
+| 1.1 Arabic / RTL | `locales/ar.json`, `assets/rtl.css`, `dir` set in `layout/theme.liquid` |
+| 2 Free gift with purchase | Admin automatic discount + `sections/gwp-cart.liquid`, `assets/gwp-cart.js`, `snippets/gwp-product-message.liquid` |
+| 3 Loyalty flow, landing page, account widget | `docs/loyalty-flow.pdf`, `templates/page.loyalty.json`, `templates/page.my-loyalty.json`, `sections/loyalty-landing.liquid`, `sections/loyalty-account.liquid` |
 
-You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
-
-## Getting started
-We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
-
-> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
-
-Please note that the main branch may include code for features not yet released. The "stable" version of Dawn is available in the theme store.
-
-## Staying up to date with Dawn changes
-
-Say you're building a new theme off Dawn but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Dawn repository.
-
-1. Navigate to your local theme folder.
-2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
-```sh
-git remote -v
-```
-3. If you don't see an `upstream`, you can add one that points to Shopify's Dawn repository:
-```sh
-git remote add upstream https://github.com/Shopify/dawn.git
-```
-4. Pull in the latest Dawn changes into your repository:
-```sh
-git fetch upstream
-git pull upstream main
-```
-
-## Developer tools
-
-There are a number of really useful tools that the Shopify Themes team uses during development. Dawn is already set up to work with these tools.
-
-### Shopify CLI
-
-[Shopify CLI](https://github.com/Shopify/shopify-cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
-
-You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
-
-### Theme Check
-
-We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
-
-We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
-
-You can also run it from a terminal with the following Shopify CLI command:
+## Run and deploy
 
 ```bash
-shopify theme check
+shopify theme dev  --store afnan-perfumes-fuho9rct     # live preview
+shopify theme push --store afnan-perfumes-fuho9rct --theme <id> --ignore "config/settings_data.json" --ignore "templates/index.json"
 ```
 
-### Continuous Integration
+`config/settings_data.json` and the JSON templates hold what the merchant saved in the theme editor (logo, images,
+Ramadan switch). The ignore flags stop a code push from overwriting that content.
 
-Dawn uses [GitHub Actions](https://github.com/features/actions) to maintain the quality of the theme. [This is a starting point](https://github.com/Shopify/dawn/blob/main/.github/workflows/ci.yml) and what we suggest to use in order to ensure you're building better themes. Feel free to build off of it!
+## How to use it (merchant guide)
 
-#### Shopify/lighthouse-ci-action
+### Switch the Ramadan look on or off
+Online Store > Customize > **Theme settings > Ramadan mode** > tick **Enable Ramadan mode** > Save.
 
-We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](https://github.com/Shopify/lighthouse-ci-action). This runs a series of [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) audits for the home, product and collections pages on a store to ensure code that gets added doesn't degrade storefront performance over time.
+- On: dark announcement bar with the Ramadan message, a full-width Ramadan hero replaces the homepage slideshow
+  (the header stays a transparent overlay), gold accents on buttons and links.
+- Off: the store returns to its normal look; nothing from Ramadan mode is rendered or loaded.
+- Texts left blank use built-in English and Arabic copy. Colours, hero image, message and the **Eid date** (used by the
+  countdown) are editable in the same group. Arabic overrides go through Translate & Adapt.
 
-#### Shopify/theme-check-action
+### Gifting page
+Create a page with the **gifting** template (handle `ramadan-gifting`). The budget tabs read products from the
+**Gift Sets** collection (or any product tagged `Gift Set`) and filter them by price in Liquid, so the merchant only
+manages one collection. Tab ranges are editable (under AED 200, 200 to 400, 400+).
 
-Dawn runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
+### Build-your-own gift box
+Lists products tagged `Perfume`. The customer picks exactly three; the box is added as one cart line using the
+**Build Your Own Gift Box** product (set price AED 399). Savings are shown against the three items' normal prices.
 
-## Contributing
+### Free gift with purchase
+Theme settings > **Free gift with purchase**: choose the qualifying collection (default `femme-collection`) and the gift
+product (default `free-gift-mini-perfume`). The AED 0 price comes from an automatic **Buy X Get Y** discount in admin
+(see below); the theme only manages the cart line and the messages.
 
-Want to make commerce better for everyone by contributing to Dawn? We'd love your help! Please read our [contributing guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bug fixes and improvements, and how to build for Dawn.
+### Loyalty
+Pages with the **loyalty** template (Rewards) and the **my-loyalty** template. Tier thresholds and a demo balance are in
+Theme settings > **Loyalty programme**.
 
-## Code of conduct
+## Admin setup required (data, not code)
 
-All developers who wish to contribute through code or issues, please first read our [Code of Conduct](https://github.com/Shopify/dawn/blob/main/.github/CODE_OF_CONDUCT.md).
+1. **Products.** Import `sample-data/products_perfumes.csv` and `products_gifting.csv` (perfumes tagged `Perfume`,
+   gift sets tagged `Gift Set`, three helper products: gift-box, gift-wrap, free gifts).
+2. **Collections.** `femme-collection` automated by tag `Femme`; `gift-sets` automated by tag `Gift Set`.
+3. **Automatic discount** (Discounts > Buy X get Y > Automatic): customer buys any item from *Femme Collection*
+   (min quantity 1); customer gets quantity 1 of the free gift products at 100% off; **maximum 1 use per order**.
+4. **Pages.** `ramadan-gifting` (template gifting), `loyalty` (template loyalty), `my-loyalty` (template my-loyalty).
+5. **Cart type: Page** (Theme settings > Cart), so every order passes the gift options before checkout.
+6. **Shipping zone** for the UAE with at least one rate, otherwise checkout reports delivery as unavailable.
+7. **Metafields (optional).** Product: `custom.scent_family`, `top_notes`, `middle_notes`, `base_notes` (single line
+   text, storefront access). Customer: `custom.loyalty_points` (integer).
 
-## Theme Store submission
+## Design decisions and trade-offs
 
-The [Shopify Theme Store](https://themes.shopify.com/) is the place where Shopify merchants find the themes that they'll use to showcase and support their business. As a theme partner, you can create themes for the Shopify Theme Store and reach an international audience of an ever-growing number of entrepreneurs.
+### Gift box: one fixed-price product with the picks as line item properties
+The three picks are stored on a single cart line as `Perfume 1/2/3` (name, size, SKU). That gives one clear line, one
+price, and the warehouse sees the contents on the order and packing slip.
+Trade-off: stock of the three perfumes is not reduced, because the line is the box product. In production I would use a
+**Cart Transform Function** to expand the box into its component variants (inventory, reporting and per-item discounts
+would then be correct). It was left out to keep the solution deployable from the theme without a custom app.
 
-Ensure that you follow the list of [theme store requirements](https://shopify.dev/themes/store/requirements) if you're interested in becoming a [Shopify Theme Partner](https://themes.shopify.com/services/themes/guidelines) and building themes for the Shopify platform.
+### Gift options are saved as cart attributes plus a real cart line
+`Gift`, `Gift message` and `Gift wrap` are cart attributes, which Shopify copies to the order under *Additional details*.
+Gift wrap is also an actual Gift Wrap line, so the AED 15 charge and the instruction are both on the order. Saves are
+serialised, and the checkout button waits for pending saves, so a message typed right before clicking *Check out* is
+never lost. The 150 character limit is enforced in the textarea and again when saving.
 
-## License
+### Free gift: discount in admin, behaviour in the theme
+Price rules belong in Shopify discounts (they apply at cart and checkout, are auditable and cannot be bypassed by
+editing the page). The theme adds the gift when a qualifying product is present, removes it when the last one goes,
+caps it at 1, and removes a gift added without a qualifying product (so the gift cannot be bought alone). If the gift
+is out of stock a message is shown and the cart is left untouched.
+Interpretation: "any second product free" is implemented as one free gift chosen from the free-gift products.
+Known limit: the qualifying list is read from `collection.products` (first 50 products); for a large catalogue I would
+use a tag or metafield instead.
 
-Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+### Loyalty: what the theme builds and what the app handles
+
+| Theme (storefront) | Loyalty app (Smile.io free plan) |
+|---|---|
+| Landing page: how it works, tier table, ways to earn, sign-up | Points ledger: earn, spend, expire, with an audit trail |
+| My Loyalty page: balance, tier, progress bar to the next tier | Earn rules: purchase, review, birthday, referral, fraud checks |
+| Tier thresholds and copy as theme settings and translations | Tier logic and automatic tier changes (VIP tiers may need a paid plan) |
+| Presentation only | Redemption: generates the discount code used at checkout, plus emails |
+
+Why: points behave like money. They need one authoritative, tamper-proof ledger tied to orders, refunds and discount
+codes. That belongs in an app (or backend) that can listen to order webhooks, not in Liquid, which only displays data.
+The theme is the right place for the branded pages and for the explanation of the programme.
+
+Shopify's **new customer accounts** do not render theme account templates, so the account widget is a normal store page
+(`my-loyalty`) that reads the logged-in `customer`. The balance comes from the metafield `custom.loyalty_points`, with a
+demo value as a fallback so the widget can be shown before the app is connected. In production the app's integration
+(or a small sync) would write that metafield, or the widget would read the app's JavaScript SDK.
+
+## Quality notes
+
+- No framework or build step: plain Liquid, CSS and vanilla JS (web components such as `<gift-box-builder>`).
+- Accessible by default: real buttons, labels, tab roles with arrow-key support, `aria-live` status messages, `<details>`
+  for the FAQ, keyboard-reachable controls.
+- RTL by design: logical CSS properties; `dir="rtl"` is set for Arabic, Hebrew, Persian and Urdu.
+- All new copy is in `locales/en.default.json` and `locales/ar.json`; section text fields fall back to these keys when left
+  blank, so a new language only needs a locale file.
+- `shopify theme check` reports no errors (the warnings that remain come from Dawn itself).
+
+## Known limitations
+
+- Stock of perfumes inside a gift box is not decremented (see above).
+- Prices in the budget tabs are compared in the visitor's currency, so the ranges are meant for AED.
+- The loyalty widget shows a demo balance until the metafield is populated.
+- The free gift is re-added automatically if a customer deletes it while a qualifying product is still in the cart
+  (this is the intended behaviour of the rule).
+
+## Repository layout
+
+```
+assets/      CSS and JS for the new features (ramadan.css, gifting.css, gift-box.js, cart-gift-options.js, gwp-cart.js, ...)
+config/      theme settings schema (Ramadan mode, Free gift, Loyalty programme) and saved settings
+docs/        loyalty flow diagram (PDF, PNG and HTML source)
+layout/      theme.liquid (dir=rtl, Ramadan class, design layers)
+locales/     en.default.json, ar.json
+sections/    new sections: gifting-*, gift-box-builder, cart-gift-options, gwp-cart, loyalty-*, ramadan-banner, product-notes
+snippets/    ramadan-styles, product page and free-gift snippets
+templates/   page.gifting, page.loyalty, page.my-loyalty plus edited index, product and cart
+sample-data/ CSVs used to create the demo products
+```
